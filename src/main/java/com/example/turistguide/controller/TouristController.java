@@ -3,10 +3,12 @@ package com.example.turistguide.controller;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.UpdateRequest;
 import com.example.turistguide.service.TouristService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -30,10 +32,16 @@ TouristController {
     }
 
     @GetMapping("{name}")
-    public ResponseEntity<TouristAttraction> getAttractionsByName(@PathVariable String name) {
+    public String getAttractionsByName(@PathVariable String name, Model model) {
 
         TouristAttraction attraction = service.getAttractionByName(name);
-        return attraction == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(attraction);
+
+        if (attraction == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
+        }
+
+        model.addAttribute("attraction", attraction);
+        return "attraction";
     }
 
     @PostMapping("/add")
