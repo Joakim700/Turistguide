@@ -1,13 +1,22 @@
 package com.example.turistguide.model;
+import com.example.turistguide.repository.TouristTags;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class TouristAttraction {
     String name;
     String description;
+    String city;
+    TouristTags tags;
 
-    public TouristAttraction(String name, String description) {
+    public TouristAttraction(String name, String description, String city, TouristTags tags) {
         this.name = name;
         this.description = description;
+        this.city = city;
+        this.tags = tags;
+
     }
 
     public String getName() {
@@ -26,6 +35,22 @@ public class TouristAttraction {
     // Request Update
     public String setDescription(String newDescription) {
         return this.description = newDescription;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public TouristTags getTags() {
+        return tags;
+    }
+
+    public void setTags(TouristTags tags) {
+        this.tags = tags;
     }
 
     @Override

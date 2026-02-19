@@ -44,28 +44,11 @@ TouristController {
         return "attraction";
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {
+//    @GetMapping("/add")
+//
+//
+//    @PostMapping("/save")
 
-        TouristAttraction touristAttraction = service.createAttraction(attraction);
-        return ResponseEntity.ok(touristAttraction);
-    }
-
-    @PostMapping("/update")
-    public ResponseEntity<TouristAttraction> updateAttraction(@RequestBody UpdateRequest request) {
-
-        TouristAttraction foundAttraction = null;
-
-        for (TouristAttraction attraction : service.getAllAttractions()) {
-
-            if (request.getOldName().equals(attraction.getName())) {
-                foundAttraction = attraction;
-                service.updateAttraction(foundAttraction, request.getNewName(), request.getNewDescription());
-                return ResponseEntity.ok(foundAttraction);
-            }
-        }
-        return ResponseEntity.notFound().build();
-    }
 
     @PostMapping("/delete/{name}")
     public ResponseEntity<TouristAttraction> deleteAttraction(@RequestBody TouristAttraction attractionToBeDeleted) {
@@ -80,7 +63,6 @@ TouristController {
         }
         return ResponseEntity.notFound().build();
     }
-
 
 
 }
