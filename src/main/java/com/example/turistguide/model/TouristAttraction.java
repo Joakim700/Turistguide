@@ -45,11 +45,11 @@ public class TouristAttraction {
         this.city = city;
     }
 
-    public List<String> getTags() {
+    public TouristTags getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(TouristTags tags) {
         this.tags = tags;
     }
 
