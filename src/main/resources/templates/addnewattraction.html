@@ -5,6 +5,21 @@
     <title>Add a new attraction:</title>
 </head>
 <body>
+<form action="#" th:action="@{/attraction/save}" th:object="${attraction}" method="post">
+    <label>Name</label>
+    <input type="text" th:field="*{name}">
+    <br>
+    <label>Description</label>
+    <input type="text" th:field="*{description}">
+    <br>
+    <label>City</label>
+    <select th:field="*{city}">
+        <option th:each="String : ${cities}" th:value="${String}" th:text="${String}"></option>
+    </select>
+    <br>
+    <button type="submit">Register</button>
+    </form>
+
 
 </body>
 </html>

@@ -44,4 +44,5 @@ public class TouristService {
 
         repository.deleteAttraction(attraction);
     }
+
 }
