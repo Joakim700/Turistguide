@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang ="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Attractions</title>
+    <title>Tourist Attractions</title>
+
+    <style>
+        /* This matches the simple, clean look of your screenshot */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%; /* Adjust width to your preference */
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        th {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
+<h1>Copenhagen Tourist Attractions</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="attraction : ${attractions}">
+        <td th:text="${attraction.getName()}">Attraction Name</td>
+        <td th:text="${attraction.getDescription()}">Attraction Description</td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
