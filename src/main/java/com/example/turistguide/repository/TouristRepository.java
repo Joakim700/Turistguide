@@ -2,6 +2,7 @@ package com.example.turistguide.repository;
 import com.example.turistguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.jar.Attributes;
 
@@ -17,11 +18,11 @@ public class TouristRepository {
 
     private void populateAttractions() { // DATABASE {Name, Description}
 
-        attractions.add(new TouristAttraction("Nyhavn", "Gammel havn, tæt på centrum. Mange restauranter og mulighed for kanalrundfart.", "Copenhagen", TouristTags.GRATIS));
-        attractions.add(new TouristAttraction("Tivoli", "Danmarks første forlystelsespark. Inviterer til en god dag ude for hele familien.", "Copenhagen", TouristTags.BØRNEVENLIG));
-        attractions.add(new TouristAttraction("Amalienborg", "Hvor Kongen og den royale familie bor, og man kan se Garderne gå runde.", "Copenhagen", TouristTags.BØRNEVENLIG));
-        attractions.add(new TouristAttraction("Marmorkirken", "En imponerende kirke af marmor, kendt for sin runde kuppel.", "Copenhagen", TouristTags.GRATIS));
-        attractions.add(new TouristAttraction("Christiansborg","Hvor politikerne styrer landet fra. Man kan komme ind og gå rundtur.", "Copenhagen", TouristTags.GRATIS));
+        attractions.add(new TouristAttraction("Nyhavn", "Gammel havn, tæt på centrum. Mange restauranter og mulighed for kanalrundfart.", "Copenhagen", List.of(TouristTags.GRATIS, TouristTags.BØRNEVENLIG)));
+        attractions.add(new TouristAttraction("Tivoli", "Danmarks første forlystelsespark. Inviterer til en god dag ude for hele familien.", "Copenhagen", List.of(TouristTags.BØRNEVENLIG)));
+        attractions.add(new TouristAttraction("Amalienborg", "Hvor Kongen og den royale familie bor, og man kan se Garderne gå runde.", "Copenhagen", List.of(TouristTags.BØRNEVENLIG)));
+        attractions.add(new TouristAttraction("Marmorkirken", "En imponerende kirke af marmor, kendt for sin runde kuppel.", "Copenhagen", List.of(TouristTags.GRATIS)));
+        attractions.add(new TouristAttraction("Christiansborg","Hvor politikerne styrer landet fra. Man kan komme ind og gå rundtur.", "Copenhagen", List.of(TouristTags.GRATIS)));
     }
 
     public List<TouristAttraction> getAllAttractions() { // Vis alle attractions
@@ -65,9 +66,23 @@ public class TouristRepository {
     public List<String> getCities() {
         List<String> allCities = new ArrayList<>();
         for (TouristAttraction t : attractions) {
-            allCities.add(t.getCity());
+            if(!allCities.contains(t.getCity())){
+                allCities.add(t.getCity());
+            }
         }
         return allCities;
+    }
+
+    public List<TouristTags> getTags() {
+        List<TouristTags> allTags = new ArrayList<>();
+        for(TouristAttraction tA : attractions){
+            for(TouristTags tT : tA.getTags()){
+                if(!allTags.contains(tT)){
+                    allTags.add(tT);
+                }
+            }
+        }
+        return allTags;
     }
 
 

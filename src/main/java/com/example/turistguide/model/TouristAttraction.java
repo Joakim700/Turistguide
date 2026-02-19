@@ -2,6 +2,7 @@ package com.example.turistguide.model;
 import com.example.turistguide.repository.TouristTags;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,14 +10,18 @@ public class TouristAttraction {
     String name;
     String description;
     String city;
-    TouristTags tags;
+    Collection<TouristTags> tags;
 
-    public TouristAttraction(String name, String description, String city, TouristTags tags) {
+    public TouristAttraction(String name, String description, String city, Collection<TouristTags> tags) {
         this.name = name;
         this.description = description;
         this.city = city;
         this.tags = tags;
 
+    }
+
+    public TouristAttraction(){
+        
     }
 
     public String getName() {
@@ -45,11 +50,11 @@ public class TouristAttraction {
         this.city = city;
     }
 
-    public TouristTags getTags() {
+    public Collection<TouristTags> getTags() {
         return tags;
     }
 
-    public void setTags(TouristTags tags) {
+    public void setTags(Collection<TouristTags> tags) {
         this.tags = tags;
     }
 
