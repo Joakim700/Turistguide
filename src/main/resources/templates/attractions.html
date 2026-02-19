@@ -42,12 +42,16 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>By</th>
+        <th>Tags</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="attraction : ${attractions}">
         <td th:text="${attraction.getName()}">Attraction Name</td>
         <td th:text="${attraction.getDescription()}">Attraction Description</td>
+        <td th:text="${attraction.getCity()}">By</td>
+        <td th:text="${attraction.getTags()}">Tags</td>
     </tr>
     </tbody>
 </table>
