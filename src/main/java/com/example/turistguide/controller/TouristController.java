@@ -55,7 +55,6 @@ TouristController {
         }
         service.createAttraction(touristAttraction);
         return "redirect:/attractions/save";
-        //TEST
     }
 
     @PostMapping("/update")
@@ -74,6 +73,7 @@ TouristController {
         return ResponseEntity.notFound().build();
     }
 
+
     @PostMapping("/delete/{name}")
     public ResponseEntity<TouristAttraction> deleteAttraction(@RequestBody TouristAttraction attractionToBeDeleted) {
 
@@ -87,7 +87,6 @@ TouristController {
         }
         return ResponseEntity.notFound().build();
     }
-
 
 
 }
