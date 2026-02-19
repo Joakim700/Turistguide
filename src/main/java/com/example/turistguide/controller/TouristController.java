@@ -44,10 +44,34 @@ TouristController {
         return "attraction";
     }
 
-//    @GetMapping("/add")
-//
-//
-//    @PostMapping("/save")
+    @PostMapping("/add")
+    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+
+        for (TouristAttraction a : service.getAllAttractions()) {
+
+            if (touristAttraction.getName().equalsIgnoreCase(a.getName())) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
+            }
+        }
+        service.createAttraction(touristAttraction);
+        return "redirect:/attractions/save";
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<TouristAttraction> updateAttraction(@RequestBody UpdateRequest request) {
+
+        TouristAttraction foundAttraction = null;
+
+        for (TouristAttraction attraction : service.getAllAttractions()) {
+
+            if (request.getOldName().equals(attraction.getName())) {
+                foundAttraction = attraction;
+                service.updateAttraction(foundAttraction, request.getNewName(), request.getNewDescription());
+                return ResponseEntity.ok(foundAttraction);
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
 
 
     @PostMapping("/delete/{name}")
