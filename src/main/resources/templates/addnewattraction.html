@@ -13,8 +13,11 @@
     <input type="text" th:field="*{description}">
     <br>
     <label>City</label>
-    <select th:field="*{city}">
-        <option th:each="String : ${cities}" th:value="${String}" th:text="${String}"></option>
+    <input type="text" th:field="*{city}">
+    <br>
+    <label>Tags</label>
+    <select th:field="*{tags}">
+        <option th:each="TouristTags : ${tags}" th:value="${TouristTags}" th:text="${TouristTags}"></option>
     </select>
     <br>
     <button type="submit">Register</button>

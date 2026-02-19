@@ -2,6 +2,7 @@ package com.example.turistguide.controller;
 
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.repository.TouristRepository;
+import com.example.turistguide.repository.TouristTags;
 import com.example.turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,8 +51,7 @@ public class TouristController {
     public String addAttraction(Model model) {
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
-        model.addAttribute("cities", repository.getCities());
-        model.addAttribute("tags", repository.getTags());
+        model.addAttribute("tags", TouristTags.values());
         return "addnewattraction";
     }
 
