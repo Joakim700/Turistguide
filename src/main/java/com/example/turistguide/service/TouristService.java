@@ -35,9 +35,9 @@ public class TouristService {
         return repository.saveAttractionToDatabase(attraction);
     }
 
-    public void updateAttraction(TouristAttraction attraction, String newName, String newDescription) {
+    public void updateAttraction(TouristAttraction attraction) {
 
-        repository.updateAttraction(attraction, newName, newDescription);
+        repository.updateAttraction(attraction);
     }
 
     public void deleteAttraction(TouristAttraction attraction) {

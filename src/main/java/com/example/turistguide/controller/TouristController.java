@@ -1,7 +1,6 @@
 package com.example.turistguide.controller;
 
 import com.example.turistguide.model.TouristAttraction;
-import com.example.turistguide.model.UpdateRequest;
 import com.example.turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/attractions")
-public class
-TouristController {
+public class TouristController {
 
     private final TouristService service;
 
@@ -54,25 +52,20 @@ TouristController {
             }
         }
         service.createAttraction(touristAttraction);
-        return "redirect:/attractions/save";
+        return "redirect:/save";
     }
 
     @PostMapping("/update")
-    public ResponseEntity<TouristAttraction> updateAttraction(@RequestBody UpdateRequest request) {
+    public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
 
-        TouristAttraction foundAttraction = null;
+        service.updateAttraction(updateAttraction);
 
-        for (TouristAttraction attraction : service.getAllAttractions()) {
-
-            if (request.getOldName().equals(attraction.getName())) {
-                foundAttraction = attraction;
-                service.updateAttraction(foundAttraction, request.getNewName(), request.getNewDescription());
-                return ResponseEntity.ok(foundAttraction);
-            }
+        if (updateAttraction == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
         }
-        return ResponseEntity.notFound().build();
-    }
 
+        return "redirect:/update";
+    }
 
     @PostMapping("/delete/{name}")
     public ResponseEntity<TouristAttraction> deleteAttraction(@RequestBody TouristAttraction attractionToBeDeleted) {
