@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/touristguide")
+@RequestMapping("/attractions")
 public class
 TouristController {
 
@@ -23,7 +23,7 @@ TouristController {
         this.service = touristService;
     }
 
-    @GetMapping("/attractions")
+    @GetMapping()
     public String attractionList(Model model) {
 
         List<TouristAttraction> attractions = service.getAllAttractions();
