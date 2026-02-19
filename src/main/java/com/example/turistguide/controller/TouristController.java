@@ -45,10 +45,16 @@ TouristController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<TouristAttraction> addAttraction(@RequestBody TouristAttraction attraction) {
+    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
 
-        TouristAttraction touristAttraction = service.createAttraction(attraction);
-        return ResponseEntity.ok(touristAttraction);
+        for (TouristAttraction a : service.getAllAttractions()) {
+
+            if (touristAttraction.getName().equalsIgnoreCase(a.getName())) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
+            }
+        }
+        service.createAttraction(touristAttraction);
+        return "redirect:/attractions";
     }
 
     @PostMapping("/update")
