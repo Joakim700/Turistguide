@@ -55,23 +55,6 @@ public class TouristController {
         return "addnewattraction";
     }
 
-
-    @PostMapping("/update")
-    public ResponseEntity<TouristAttraction> updateAttraction(@RequestBody UpdateRequest request) {
-
-       TouristAttraction foundAttraction = null;
-
-       for (TouristAttraction attraction : service.getAllAttractions()) {
-
-           if (request.getOldName().equals(attraction.getName())) {
-               foundAttraction = attraction;
-            service.updateAttraction(foundAttraction, request.getNewName(), request.getNewDescription());
-              return ResponseEntity.ok(foundAttraction);
-          }
-        }
-       return ResponseEntity.notFound().build();
-   }
-
     @PostMapping("/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
 
