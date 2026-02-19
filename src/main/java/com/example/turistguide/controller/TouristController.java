@@ -42,7 +42,7 @@ public class TouristController {
         return "attraction";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
 
         for (TouristAttraction a : service.getAllAttractions()) {
@@ -52,7 +52,7 @@ public class TouristController {
             }
         }
         service.createAttraction(touristAttraction);
-        return "redirect:/save";
+        return "redirect:/attractions";
     }
 
     @PostMapping("/update")
