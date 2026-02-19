@@ -1,4 +1,6 @@
 package com.example.turistguide.model;
+import com.example.turistguide.repository.TouristTags;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -7,9 +9,9 @@ public class TouristAttraction {
     String name;
     String description;
     String city;
-    List<String> tags = new ArrayList<>();
+    TouristTags tags;
 
-    public TouristAttraction(String name, String description, String city, List<String> tags) {
+    public TouristAttraction(String name, String description, String city, TouristTags tags) {
         this.name = name;
         this.description = description;
         this.city = city;
@@ -41,6 +43,14 @@ public class TouristAttraction {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
     @Override

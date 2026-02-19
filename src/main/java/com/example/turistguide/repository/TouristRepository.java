@@ -16,11 +16,11 @@ public class TouristRepository {
 
     private void populateAttractions() { // DATABASE {Name, Description}
 
-        attractions.add(new TouristAttraction("Nyhavn", "Gammel havn, tæt på centrum. Mange restauranter og mulighed for kanalrundfart.", "Copenhagen"));
-        attractions.add(new TouristAttraction("Tivoli", "Danmarks første forlystelsespark. Inviterer til en god dag ude for hele familien.", "Copenhagen"));
-        attractions.add(new TouristAttraction("Amalienborg", "Hvor Kongen og den royale familie bor, og man kan se Garderne gå runde.", "Copenhagen"));
-        attractions.add(new TouristAttraction("Marmorkirken", "En imponerende kirke af marmor, kendt for sin runde kuppel.", "Copenhagen"));
-        attractions.add(new TouristAttraction("Christiansborg","Hvor politikerne styrer landet fra. Man kan komme ind og gå rundtur.", "Copenhagen"));
+        attractions.add(new TouristAttraction("Nyhavn", "Gammel havn, tæt på centrum. Mange restauranter og mulighed for kanalrundfart.", "Copenhagen", TouristTags.GRATIS));
+        attractions.add(new TouristAttraction("Tivoli", "Danmarks første forlystelsespark. Inviterer til en god dag ude for hele familien.", "Copenhagen", TouristTags.BØRNEVENLIG));
+        attractions.add(new TouristAttraction("Amalienborg", "Hvor Kongen og den royale familie bor, og man kan se Garderne gå runde.", "Copenhagen", TouristTags.BØRNEVENLIG));
+        attractions.add(new TouristAttraction("Marmorkirken", "En imponerende kirke af marmor, kendt for sin runde kuppel.", "Copenhagen", TouristTags.GRATIS));
+        attractions.add(new TouristAttraction("Christiansborg","Hvor politikerne styrer landet fra. Man kan komme ind og gå rundtur.", "Copenhagen", TouristTags.GRATIS));
     }
 
 
