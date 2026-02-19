@@ -70,7 +70,6 @@ public class TouristController {
     @PostMapping("/delete/{name}")
     public ResponseEntity<TouristAttraction> deleteAttraction(@RequestBody TouristAttraction attractionToBeDeleted) {
 
-
         for (TouristAttraction attraction : service.getAllAttractions()) {
 
             if (attraction.getName().equals(attractionToBeDeleted.getName())) {
