@@ -3,6 +3,7 @@ import com.example.turistguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.Attributes;
 
 @Repository
 public class TouristRepository {
@@ -23,8 +24,6 @@ public class TouristRepository {
         attractions.add(new TouristAttraction("Christiansborg","Hvor politikerne styrer landet fra. Man kan komme ind og gå rundtur.", "Copenhagen", TouristTags.GRATIS));
     }
 
-
-
     public List<TouristAttraction> getAllAttractions() { // Vis alle attractions
 
         return new ArrayList<>(attractions);
@@ -43,6 +42,13 @@ public class TouristRepository {
         return null;
     }
 
+    public TouristAttraction updateAttraction(TouristAttraction attraction) {
+
+        TouristAttraction updateAttraction = getAttractionByName(attraction.getName());
+        attractions.remove(updateAttraction);
+        attractions.add(attraction);
+        return attraction;
+    }
 
     public TouristAttraction saveAttractionToDatabase(TouristAttraction attraction) { // Add new Attraction
 
@@ -50,11 +56,6 @@ public class TouristRepository {
         return attraction;
     }
 
-    public void updateAttraction(TouristAttraction attraction, String newName, String newDescription) {
-
-        attraction.setName(newName);
-        attraction.setDescription(newDescription);
-    }
 
     public void deleteAttraction(TouristAttraction attraction) {
 
@@ -68,6 +69,7 @@ public class TouristRepository {
         }
         return allCities;
     }
+
 
 
 }
