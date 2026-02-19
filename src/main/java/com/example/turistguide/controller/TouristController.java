@@ -45,6 +45,7 @@ public class TouristController {
         return "attraction";
     }
 
+
     @GetMapping("/add")
     public String addAttraction(Model model) {
         TouristAttraction attraction = new TouristAttraction();
@@ -55,26 +56,50 @@ public class TouristController {
     }
 
 
-//    @PostMapping("/update")
-//    public ResponseEntity<TouristAttraction> updateAttraction(@RequestBody UpdateRequest request) {
-//
-//        TouristAttraction foundAttraction = null;
-//
-//        for (TouristAttraction attraction : service.getAllAttractions()) {
-//
-//            if (request.getOldName().equals(attraction.getName())) {
-//                foundAttraction = attraction;
-//                service.updateAttraction(foundAttraction, request.getNewName(), request.getNewDescription());
-//                return ResponseEntity.ok(foundAttraction);
-//            }
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
+    @PostMapping("/update")
+    public ResponseEntity<TouristAttraction> updateAttraction(@RequestBody UpdateRequest request) {
 
+       TouristAttraction foundAttraction = null;
+
+       for (TouristAttraction attraction : service.getAllAttractions()) {
+
+           if (request.getOldName().equals(attraction.getName())) {
+               foundAttraction = attraction;
+            service.updateAttraction(foundAttraction, request.getNewName(), request.getNewDescription());
+              return ResponseEntity.ok(foundAttraction);
+          }
+        }
+       return ResponseEntity.notFound().build();
+   }
+
+    @PostMapping("/save")
+    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+
+        for (TouristAttraction a : service.getAllAttractions()) {
+
+            if (touristAttraction.getName().equalsIgnoreCase(a.getName())) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
+            }
+        }
+        service.createAttraction(touristAttraction);
+        return "redirect:/attractions";
+    }
+
+    @PostMapping("/update")
+    public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
+
+        service.updateAttraction(updateAttraction);
+
+        if (updateAttraction == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
+        }
+
+
+        return "redirect:/update";
+    }
 
     @PostMapping("/delete/{name}")
     public ResponseEntity<TouristAttraction> deleteAttraction(@RequestBody TouristAttraction attractionToBeDeleted) {
-
 
         for (TouristAttraction attraction : service.getAllAttractions()) {
 
