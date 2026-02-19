@@ -54,7 +54,7 @@ TouristController {
             }
         }
         service.createAttraction(touristAttraction);
-        return "redirect:/attractions";
+        return "redirect:/attractions/save";
     }
 
     @PostMapping("/update")
