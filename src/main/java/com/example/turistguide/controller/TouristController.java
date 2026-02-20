@@ -24,6 +24,7 @@ public class TouristController {
         this.service = touristService;
     }
 
+
     @GetMapping("/attractions")
     public String attractionList(Model model) {
 
