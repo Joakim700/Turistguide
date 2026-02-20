@@ -5,7 +5,7 @@
     <title>Add a new attraction:</title>
 </head>
 <body>
-<form action="#" th:action="@{/touristguide/save}" th:object="${attraction}" method="post">
+<form action="#" th:action="@{/touristguide/attractions/save}" th:object="${attraction}" method="post">
     <label>Name</label>
     <input type="text" th:field="*{name}">
     <br>

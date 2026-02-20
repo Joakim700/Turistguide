@@ -1,7 +1,6 @@
 package com.example.turistguide.controller;
 
 import com.example.turistguide.model.TouristAttraction;
-import com.example.turistguide.repository.TouristRepository;
 import com.example.turistguide.repository.TouristTags;
 import com.example.turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Controller
+@RequestMapping("/touristguide")
 public class TouristController {
 
     private final TouristService service;
@@ -22,7 +22,7 @@ public class TouristController {
         this.service = touristService;
     }
 
-    @RequestMapping("/touristguide")
+    @GetMapping("/homepage")
     public String showHomePage() {
         return "homepage";
     }
@@ -69,6 +69,7 @@ public class TouristController {
         service.createAttraction(touristAttraction);
         return "redirect:/touristguide/attractions";
     }
+
 
     @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
