@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Navigation-bar */
+.navigation-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.navigation-bar .company-name {
+    font-size: 2.7rem;
+    text-transform: uppercase;
+}
+
+.navigation-bar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-btn:hover {
+    color: #007bff;
+}
+
+.company-name {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+
+
+
