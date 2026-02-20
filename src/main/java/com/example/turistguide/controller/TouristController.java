@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/turistguide")
+@RequestMapping("/touristguide")
 public class TouristController {
 
     private final TouristService service;
@@ -64,7 +64,7 @@ public class TouristController {
             }
         }
         service.createAttraction(touristAttraction);
-        return "redirect:/attractions";
+        return "redirect:/touristguide/attractions";
     }
 
     @PostMapping("/update")
