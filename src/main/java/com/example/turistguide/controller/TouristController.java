@@ -7,7 +7,6 @@ import com.example.turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/attractions")
+@RequestMapping("/touristguide")
 public class TouristController {
 
     private final TouristService service;
@@ -25,15 +24,15 @@ public class TouristController {
         this.service = touristService;
     }
 
-    @GetMapping()
+    @GetMapping("/attractions")
     public String attractionList(Model model) {
 
         List<TouristAttraction> attractions = service.getAllAttractions();
         model.addAttribute("attractions", attractions);
-        return "attractions";
+        return "allattractions";
     }
 
-    @GetMapping("{name}")
+    @GetMapping("/attractions/{name}")
     public String getAttractionsByName(@PathVariable String name, Model model) {
 
         TouristAttraction attraction = service.getAttractionByName(name);
@@ -65,7 +64,7 @@ public class TouristController {
             }
         }
         service.createAttraction(touristAttraction);
-        return "redirect:/attractions";
+        return "redirect:/touristguide/attractions";
     }
 
     @PostMapping("/update")

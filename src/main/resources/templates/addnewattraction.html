@@ -5,7 +5,7 @@
     <title>Add a new attraction:</title>
 </head>
 <body>
-<form action="#" th:action="@{/attraction/save}" th:object="${attraction}" method="post">
+<form action="#" th:action="@{/touristguide/save}" th:object="${attraction}" method="post">
     <label>Name</label>
     <input type="text" th:field="*{name}">
     <br>
@@ -15,11 +15,16 @@
     <label>City</label>
     <input type="text" th:field="*{city}">
     <br>
-    <label>Tags</label>
-    <select th:field="*{tags}">
-        <option th:each="TouristTags : ${tags}" th:value="${TouristTags}" th:text="${TouristTags}"></option>
-    </select>
-    <br>
+    <label><strong>Tags:</strong></label>
+    <div class="tag-container">
+        <div th:each="tag : ${tags}" class="tag-item">
+            <input type="checkbox"
+                   th:field="*{tags}"
+                   th:value="${tag}"
+                   th:id="${'tag-' + tag}"/>
+            <label th:for="${'tag-' + tag}" th:text="${tag}"></label>
+        </div>
+    </div>
     <button type="submit">Register</button>
     </form>
 
