@@ -49,7 +49,7 @@ public class TouristController {
     }
 
 
-    @GetMapping("/add")
+    @GetMapping("/attractions/add")
     public String addAttraction(Model model) {
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
@@ -57,7 +57,7 @@ public class TouristController {
         return "addnewattraction";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/attractions/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
 
         for (TouristAttraction a : service.getAllAttractions()) {
@@ -70,7 +70,7 @@ public class TouristController {
         return "redirect:/touristguide/attractions";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
 
         service.updateAttraction(updateAttraction);
@@ -81,7 +81,7 @@ public class TouristController {
         return "redirect:/update";
     }
 
-    @PostMapping("/delete/{name}")
+    @PostMapping("/attractions/delete/{name}")
     public ResponseEntity<TouristAttraction> deleteAttraction(@RequestBody TouristAttraction attractionToBeDeleted) {
 
         for (TouristAttraction attraction : service.getAllAttractions()) {
