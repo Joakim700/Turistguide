@@ -79,8 +79,6 @@ public class TouristController {
         if (updateAttraction == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
         }
-
-
         return "redirect:/update";
     }
 
