@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link href="../css/output.css" rel="stylesheet">
+
     <title>Tourist Guide</title>
 </head>
 <body class="bg-white">
@@ -15,6 +16,11 @@
         </h1>
 
         <ul class="flex space-x-8 text-lg text-red-700">
+            <li>
+                <a th:href="@{/touristguide}" class="hover:text-black transition duration-200">
+                    Home
+                </a>
+            </li>
             <li>
                 <a href="attractions.html" class="hover:text-black transition duration-200">
                     Show Attractions

@@ -17,7 +17,6 @@ import java.util.List;
 public class TouristController {
 
     private final TouristService service;
-    private TouristRepository repository;
 
     public TouristController(TouristService touristService) {
         this.service = touristService;
