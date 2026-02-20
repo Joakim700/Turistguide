@@ -26,6 +26,7 @@ public class TouristController {
 
 
 
+
     @GetMapping("/attractions")
     public String attractionList(Model model) {
 
