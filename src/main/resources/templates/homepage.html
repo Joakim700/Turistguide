@@ -2,13 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="stylesheet.css">
+    <link href="../css/output.css" rel="stylesheet">
     <title>Tourist Guide</title>
 </head>
-<body>
+<body class="bg-white">
 
-<header>
+<header class="bg-gray-200 shadow-md">
 
+
+    <!-- Navigation -->
+    <nav class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+
+        <!-- Logo / Title -->
+        <h1 class="text-4xl font-light tracking-wide text-black">
+            TOURIST GUIDE
+        </h1>
+
+        <!-- Navigation Links -->
+        <ul class="flex space-x-8 text-lg text-red-700">
+            <li>
+                <a href="attractions.html" class="hover:text-black transition duration-200">
+                    Show Attractions
+                </a>
+            </li>
+            <li>
+                <a href="#" class="hover:text-black transition duration-200">
+                    Favourites
+                </a>
+            </li>
+            <li>
+                <a href="#" class="hover:text-black transition duration-200">
+                    About Us
+                </a>
+            </li>
 <!--Universal Nav-->
     <nav class="navigation-bar">
             <h1 class="company-name">Tourist Guide</h1>
@@ -17,18 +43,93 @@
             <li><a href="#" class="nav-btn">Favourites</a></li>
             <li><a href="#" class="nav-btn">About Us</a></li>
         </ul>
+
     </nav>
 
 </header>
 
+<!-- Main body -->
+<main class="max-w-7xl mx-auto px-8 py-12">
 
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
 
-<!--Universal Footer-->
-<footer>
+        <div class="relative h-[400px] bg-gray-100 overflow-hidden rounded-sm">
+            <img
+                    src="../images/earth.jpg"
+                    alt="Travel Destination"
+                    class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
+            />
+        </div>
 
+        <div class="space-y-6">
+            <span class="text-red-700 uppercase tracking-widest text-sm font-semibold">Discovery</span>
+            <h2 class="text-5xl font-light leading-tight">Explore the world with fresh eyes.</h2>
+            <p class="text-gray-600 text-lg leading-relaxed">
+                From hidden cobblestone alleys to vibrant city centers, our guide provides curated insights to make your next journey unforgettable.
+            </p>
+            <button class="px-8 py-3 bg-black text-white hover:bg-red-700 transition duration-300">
+                Start Exploring
+            </button>
+        </div>
+    </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-8 border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-xl transition duration-300">
+            <h3 class="text-xl mb-3 text-red-700 font-medium">Local Gems</h3>
+            <p class="text-gray-500">Discover spots that aren't on the typical tourist map, curated by locals who know best.</p>
+        </div>
 
-</footer>
+        <div class="p-8 border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-xl transition duration-300">
+            <h3 class="text-xl mb-3 text-red-700 font-medium">Travel Tips</h3>
+            <p class="text-gray-500">Unlock the city’s rhythm with logistical secrets and transit shortcuts known only to those who call these streets home.</p>
+        </div>
+
+        <div class="p-8 border border-gray-100 bg-gray-50 hover:bg-white hover:shadow-xl transition duration-300">
+            <h3 class="text-xl mb-3 text-red-700 font-medium">Best Eats</h3>
+            <p class="text-gray-500">A hand-picked selection of the finest dining and street food experiences globally.</p>
+        </div>
+    </div>
+
+</main>
+
+<!-- Footer -->
+
+            <footer class="border-t border-gray-100 bg-white mt-12">
+                <div class="max-w-7xl mx-auto px-8 py-12">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+
+                        <div>
+                            <h2 class="text-2xl font-light tracking-wide text-black">
+                                TOURIST GUIDE
+                            </h2>
+                            <p class="text-gray-500 mt-2 max-w-xs">
+                                Curating the best experiences for the modern traveler.
+                            </p>
+                        </div>
+
+                        <ul class="flex flex-wrap gap-x-8 gap-y-4 text-red-700">
+                            <li>
+                                <a href="attractions.html" class="hover:text-black transition duration-200">Attractions</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:text-black transition duration-200">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:text-black transition duration-200">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-12 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between text-sm text-gray-400">
+                        <p>&copy; 2026 Tourist Guide. All rights reserved.</p>
+                        <div class="flex space-x-6 mt-4 md:mt-0">
+                            <a href="#" class="hover:text-black transition">Instagram</a>
+                            <a href="#" class="hover:text-black transition">Twitter</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
 
 </body>
 </html>

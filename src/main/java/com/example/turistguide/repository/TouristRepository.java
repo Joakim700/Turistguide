@@ -9,7 +9,7 @@ import java.util.jar.Attributes;
 @Repository
 public class TouristRepository {
 
-    private List<TouristAttraction> attractions = new ArrayList<>();
+    private final List<TouristAttraction> attractions = new ArrayList<>();
 
     public TouristRepository() {
 
