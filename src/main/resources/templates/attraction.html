@@ -1,13 +1,56 @@
 <!DOCTYPE html>
-<html lang ="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%; /* Adjust width to your preference */
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            font-size: 18px;
+        }
+
+        th {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-<h1 th:text="${attraction.getName()}"></h1>
-<p th:text="${attraction.getDescription()}"></p>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>By</th>
+        <th>Tags</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="attraction : ${attraction}">
+        <td th:text="${attraction.getName()}">Attraction Name</td>
+        <td th:text="${attraction.getDescription()}">Attraction Description</td>
+        <td th:text="${attraction.getCity()}">By</td>
+        <td th:text="${attraction.getTags()}">Tags</td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
