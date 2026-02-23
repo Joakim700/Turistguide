@@ -24,19 +24,25 @@
 
 
 <main class="max-w-7xl mx-auto px-8 py-12">
-	<h1 class=" grid text-4xl font-bold text-gray-800 mb-10 text-center">The Boys Responsible:</h1>
+	<h1 class=" grid text-4xl font-bold text-gray-800 mb-10 text-center">The Boys</h1>
 
 	<ul class="space-y-6 max-w-4xl mx-auto">
 		<!-- Robert -->
-		<li class="flex items-center bg-white rounded-xl hover:shadow-xl shadow-sm transition p-6">
+		<li class="flex items-center bg-white rounded-xl hover:shadow-xl shadow-sm transition p-7">
 			<img th:src="@{/css/images/raxos.png}"
-			     class="h-9 w-9 object-cover rounded-full border-2 mr-7"
+			     style="
+					    height: 10.25rem;       /* h-9 */
+					    width: 10.25rem;        /* w-9 */
+					    object-fit: cover;     /* object-cover */
+					    border-radius: 9999px; /* rounded-full */
+					    border: 1px solid dimgrey; /* border-1 (grey) */
+					    margin-right: 1.75rem; /* mr-7 */"
 			     alt="Robert's image"
 			      />
 			<div>
 				<div class="font-semibold text-gray-700 text-lg">Robert</div>
 				<div class="text-gray-500 text-sm mb-2">R4X05Z3R0</div>
-				<a href="https://github.com/R4X05Z3R0"  target="_blank" class="bg-purple-900 text-white px-4 py-2 rounded hover:bg-purple-950 transition shadow-sm text-sm">
+				<a href="https://github.com/R4X05Z3R0"  target="_blank" class="bg-purple-900 text-white px-4 rounded hover:bg-purple-950 transition shadow-sm text-sm">
 					GitHub Profile
 				</a>
 			</div>
