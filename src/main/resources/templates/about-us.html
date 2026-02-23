@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link href="../css/output.css" rel="stylesheet">
-	<title>About Us</title>
+	<link href="/css/output.css" rel="stylesheet">
+	<title>The Team</title>
 </head>
 
 <body class="bg-white">
@@ -15,23 +15,24 @@
 		</h1>
 
 		<ul class="flex space-x-8 text-lg text-red-700">
-			<li><a th:href="@{/tourist/homepage}" class="hover:text-black transition duration-200">Home</a></li>
-			<li><a th:href="@{/tourist/attractions}" class="hover:text-black transition duration-200">Attractions</a></li>
-			<li><a href="about-us.html" class="hover:text-black transition duration-200">About Us</a></li>
+			<li><a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">Home</a></li>
+			<li><a th:href="@{/touristguide/attractions}" class="hover:text-black transition duration-200">Attractions</a></li>
+			<li><a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">About Us</a></li>
 		</ul>
 	</nav>
 </header>
 
 
 <main class="max-w-7xl mx-auto px-8 py-12">
-	<h1 class="text-3xl font-bold text-gray-800 mb-10 text-center">The Boys Responsible:</h1>
+	<h1 class=" grid text-4xl font-bold text-gray-800 mb-10 text-center">The Boys Responsible:</h1>
 
 	<ul class="space-y-6 max-w-4xl mx-auto">
 		<!-- Robert -->
 		<li class="flex items-center bg-white rounded-xl hover:shadow-xl shadow-sm transition p-6">
-			<img src="../../resources/static/css/images/raxos.png"
+			<img th:src="@{/css/images/raxos.png}"
+			     class="h-9 w-9 object-cover rounded-full border-2 mr-7"
 			     alt="Robert's image"
-			     class="h-9 w-9 object-scale-down rounded-full mr-7" />
+			      />
 			<div>
 				<div class="font-semibold text-gray-700 text-lg">Robert</div>
 				<div class="text-gray-500 text-sm mb-2">R4X05Z3R0</div>
@@ -43,9 +44,9 @@
 
 		<!-- Joakim -->
 		<li class="flex items-center bg-white rounded-xl shadow-sm hover:shadow-xl transition p-6">
-			<img src="../../resources/static/css/images/joakim.jpg"
+			<img th:src="@{/css/images/joakim.jpg}"
 			     alt="Joakim's image"
-			     class="w-20 h-20 rounded-full object-cover mr-6" />
+			     class="w-9 h-9 rounded-full object-cover mr-6" />
 			<div>
 				<div class="font-semibold text-gray-700 text-lg">Joakim</div>
 				<div class="text-gray-500 text-sm mb-2">Joakim-700</div>

@@ -27,6 +27,11 @@ public class TouristController {
         return "homepage";
     }
 
+    @GetMapping("/about-us")
+    public String getAboutUs(){
+        return "about-us";
+    }
+
     @GetMapping("/attractions")
     public String attractionList(Model model) {
 
