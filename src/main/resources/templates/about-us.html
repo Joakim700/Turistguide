@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link href="../css/output.css" rel="stylesheet">
+	<title>The Team</title>
+</head>
+
+<body class="bg-white">
+
+<header class="bg-gray-200 shadow-md">
+	<nav class="flex max-w-7xl mx-auto px-8 py-6 items-center justify-between" aria-label="Main Navigation">
+		<h1 class="text-4xl font-light tracking-wide text-black">
+			TOURIST GUIDE
+		</h1>
+
+		<ul class="flex space-x-8 text-lg text-red-700">
+			<li><a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">Home</a></li>
+			<li><a th:href="@{/touristguide/attractions}" class="hover:text-black transition duration-200">Attractions</a></li>
+			<li><a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">About Us</a></li>
+		</ul>
+	</nav>
+</header>
+
+
+<main class="max-w-7xl mx-auto px-8 py-12">
+	<h1 class=" grid text-4xl font-bold text-gray-800 mb-10 text-center">The Boys</h1>
+
+	<ul class="space-y-6 max-w-4xl mx-auto">
+		<!-- Robert -->
+		<li class="flex items-center bg-white rounded-xl hover:shadow-xl shadow-sm transition p-7">
+			<img th:src="@{/css/images/raxos.png}"
+			     class="h-41 w-41 object-cover rounded-full border border-gray-500 mr-7"
+			     alt="Robert's image"
+			      />
+			<div>
+				<div class="font-semibold text-gray-700 text-lg">Robert</div>
+				<div class="text-gray-500 text-sm mb-2">R4X05Z3R0</div>
+				<a href="https://github.com/R4X05Z3R0"  target="_blank" class="bg-purple-900 text-white px-4 py-2 rounded hover:bg-purple-950 transition shadow-sm text-sm">
+					GitHub Profile
+				</a>
+			</div>
+		</li>
+
+		<!-- Joakim -->
+		<li class="flex items-center bg-white rounded-xl shadow-sm hover:shadow-xl transition p-6">
+			<img th:src="@{/css/images/joakim.jpg}"
+			     alt="Joakim's image"
+			     class="h-41 w-41 object-cover rounded-full border border-gray-500 mr-7"/>
+			<div>
+				<div class="font-semibold text-gray-700 text-lg">Joakim</div>
+				<div class="text-gray-500 text-sm mb-2">Joakim-700</div>
+				<a href="https://github.com/Joakim700"
+				   class="bg-purple-900 text-white px-4 py-2 rounded hover:bg-purple-950 transition shadow-sm text-sm">GitHub Profile</a>
+			</div>
+		</li>
+
+		<!-- Emil -->
+		<li class="flex items-center bg-white rounded-xl shadow-sm hover:shadow-xl transition p-6">
+			<img th:src="@{/css/images/emil.jpg}"
+			     alt="Emil's image"
+			     class="h-41 w-41 object-cover rounded-full border border-gray-500 mr-7"/>
+			<div>
+				<div class="font-semibold text-gray-700 text-lg">Emil</div>
+				<div class="text-gray-500 text-sm mb-2">Mowgli-dk</div>
+				<a href="https://github.com/Mowgli-dk"
+				   class="bg-purple-900 text-white px-4 py-2 rounded hover:bg-purple-950 transition shadow-sm text-sm">GitHub Profile</a>
+			</div>
+		</li>
+
+		<!-- Simon -->
+		<li class="flex items-center bg-white rounded-xl shadow-sm hover:shadow-xl transition p-6">
+			<img th:src="@{/css/images/simon.jpg}"
+			     alt="Simon's image"
+			     class="h-41 w-41 object-cover rounded-full border border-gray-500 mr-7"/>
+			<div>
+				<div class="font-semibold text-gray-700 text-lg">Simon</div>
+				<div class="text-gray-500 text-sm mb-2">SimonBeCh</div>
+				<a href="https://github.com/SimonBeCh"
+				   class="bg-purple-900 text-white px-4 py-2 rounded hover:bg-purple-950 transition shadow-sm text-sm">GitHub Profile</a>
+			</div>
+		</li>
+	</ul>
+</main>
+
+<footer class="border-t border-gray-100 bg-white mt-12">
+	<div class="max-w-7xl mx-auto px-8 py-12">
+		<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+
+			<div>
+				<h2 class="text-2xl font-light tracking-wide text-black">
+					TOURIST GUIDE
+				</h2>
+				<p class="text-gray-500 mt-2 max-w-xs">
+					Curating the best experiences for the modern traveler.
+				</p>
+			</div>
+
+			<ul class="flex flex-wrap gap-x-8 gap-y-4 text-red-700">
+				<li>
+					<a th:href="@{/touristguide/attractions}" class="hover:text-black transition duration-200">Attractions</a>
+				</li>
+				<li>
+					<a href="#" class="hover:text-black transition duration-200">Privacy Policy</a>
+				</li>
+				<li>
+					<a href="about-us.html" class="hover:text-black transition duration-200">Contact</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="mt-12 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between text-sm text-gray-400">
+			<p>&copy; 2026 Tourist Guide. All rights reserved.</p>
+		</div>
+	</div>
+</footer>
+
+</body>
+</html>

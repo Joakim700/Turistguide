@@ -1,6 +1,29 @@
 {
   "dependencies": {
-    "@tailwindcss/cli": "^4.2.0",
-    "tailwindcss": "^4.2.0"
-  }
+    "@tailwindcss/cli": "^4.2.0"
+  },
+  "name": "turistguide",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "autoprefixer": "^10.4.24",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joakim700/Turistguide.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Joakim700/Turistguide/issues"
+  },
+  "homepage": "https://github.com/Joakim700/Turistguide#readme"
 }
