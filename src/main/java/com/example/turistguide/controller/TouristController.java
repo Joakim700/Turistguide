@@ -62,6 +62,13 @@ public class TouristController {
         return "redirect:/touristguide/attractions";
     }
 
+    @GetMapping("/attractions/{name}/edit")
+    public String editAttraction(@PathVariable String name, Model model){
+        TouristAttraction attraction = service.getAttractionByName(name);
+        model.addAttribute("attraction", attraction);
+        return "update-attraction";
+    }
+
     @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
         service.updateAttraction(updateAttraction);

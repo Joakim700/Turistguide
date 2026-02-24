@@ -55,12 +55,10 @@
 <!--        </td>-->
 
 	    <td>
-		    <!--Edit-->
-		    <a>
-		    <button type="button">Edit</button>
-		    </a>
-		    <!--Edit-->
-		    <a>
+
+		    <!--Update-->
+		    <a th:href="@{/touristguide/attractions/{name}/edit(name=${attraction.getName()})}"
+		       style="display: inline-block">
 			    <button type="button">Update</button>
 		    </a>
 
