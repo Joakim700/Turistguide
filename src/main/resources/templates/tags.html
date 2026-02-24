@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../css/output.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Tags</title>
+</head>
+<body>
+
+<div th:each="tag : ${tags}">
+    <p th:text="${tag.name()}"></p>
+</div>
+
+</body>
+</html>
