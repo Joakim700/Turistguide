@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<link href="/css/output.css" rel="stylesheet">
+	<link href="../css/output.css" rel="stylesheet">
 	<title>The Team</title>
 </head>
 
@@ -30,19 +30,13 @@
 		<!-- Robert -->
 		<li class="flex items-center bg-white rounded-xl hover:shadow-xl shadow-sm transition p-7">
 			<img th:src="@{/css/images/raxos.png}"
-			     style="
-					    height: 10.25rem;       /* h-9 */
-					    width: 10.25rem;        /* w-9 */
-					    object-fit: cover;     /* object-cover */
-					    border-radius: 9999px; /* rounded-full */
-					    border: 1px solid dimgrey; /* border-1 (grey) */
-					    margin-right: 1.75rem; /* mr-7 */"
+			     class="h-41 w-41 object-cover rounded-full border border-gray-500 mr-7"
 			     alt="Robert's image"
 			      />
 			<div>
 				<div class="font-semibold text-gray-700 text-lg">Robert</div>
 				<div class="text-gray-500 text-sm mb-2">R4X05Z3R0</div>
-				<a href="https://github.com/R4X05Z3R0"  target="_blank" class="bg-purple-900 text-white px-4 rounded hover:bg-purple-950 transition shadow-sm text-sm">
+				<a href="https://github.com/R4X05Z3R0"  target="_blank" class="bg-purple-900 text-white px-4 py-2 rounded hover:bg-purple-950 transition shadow-sm text-sm">
 					GitHub Profile
 				</a>
 			</div>
@@ -52,7 +46,7 @@
 		<li class="flex items-center bg-white rounded-xl shadow-sm hover:shadow-xl transition p-6">
 			<img th:src="@{/css/images/joakim.jpg}"
 			     alt="Joakim's image"
-			     class="w-9 h-9 rounded-full object-cover mr-6" />
+			     class="h-41 w-41 object-cover rounded-full border border-gray-500 mr-7"/>
 			<div>
 				<div class="font-semibold text-gray-700 text-lg">Joakim</div>
 				<div class="text-gray-500 text-sm mb-2">Joakim-700</div>
@@ -63,9 +57,9 @@
 
 		<!-- Emil -->
 		<li class="flex items-center bg-white rounded-xl shadow-sm hover:shadow-xl transition p-6">
-			<img src="../../resources/static/css/images/emil.jpg(placeholder)"
+			<img th:src="@{/css/images/emil.jpg}"
 			     alt="Emil's image"
-			     class="w-20 h-20 rounded-full object-cover mr-6" />
+			     class="h-41 w-41 object-cover rounded-full border border-gray-500 mr-7"/>
 			<div>
 				<div class="font-semibold text-gray-700 text-lg">Emil</div>
 				<div class="text-gray-500 text-sm mb-2">Mowgli-dk</div>
@@ -76,9 +70,9 @@
 
 		<!-- Simon -->
 		<li class="flex items-center bg-white rounded-xl shadow-sm hover:shadow-xl transition p-6">
-			<img src="../../resources/static/css/images/simon.jpg(placeholder)"
+			<img th:src="@{/css/images/simon.jpg}"
 			     alt="Simon's image"
-			     class="w-20 h-20 rounded-full object-cover mr-6" />
+			     class="h-41 w-41 object-cover rounded-full border border-gray-500 mr-7"/>
 			<div>
 				<div class="font-semibold text-gray-700 text-lg">Simon</div>
 				<div class="text-gray-500 text-sm mb-2">SimonBeCh</div>
