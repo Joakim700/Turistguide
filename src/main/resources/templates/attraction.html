@@ -17,7 +17,7 @@
 
         table {
             border-collapse: collapse;
-            width: 80%; /* Adjust width to your preference */
+            width: 80%;
         }
 
         th, td {
@@ -44,11 +44,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="attraction : ${attraction}">
-        <td th:text="${attraction.getName()}">Attraction Name</td>
-        <td th:text="${attraction.getDescription()}">Attraction Description</td>
-        <td th:text="${attraction.getCity()}">By</td>
-        <td th:text="${attraction.getTags()}">Tags</td>
+    <tr>
+        <td th:text="${attraction.getName()}"></td>
+        <td th:text="${attraction.getDescription()}"></td>
+        <td th:text="${attraction.getCity()}"></td>
+        <td>
+            <a th:href="@{/touristguide/attractions/{name}/tags(name=${attraction.getName()})}"
+               th:text="${#strings.replace(#strings.replace(attraction.getTags().toString(), '[', ''), ']', '')}">
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

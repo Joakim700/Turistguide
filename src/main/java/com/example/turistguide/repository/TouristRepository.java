@@ -13,11 +13,13 @@ public class TouristRepository {
     }
 
     private void populateAttractions() { // DATABASE {Name, Description}
-        attractions.add(new TouristAttraction("Nyhavn", "Gammel havn, tæt på centrum. Mange restauranter og mulighed for kanalrundfart.", "Copenhagen", List.of(TouristTags.GRATIS, TouristTags.BØRNEVENLIG)));
-        attractions.add(new TouristAttraction("Tivoli", "Danmarks første forlystelsespark. Inviterer til en god dag ude for hele familien.", "Copenhagen", List.of(TouristTags.BØRNEVENLIG)));
-        attractions.add(new TouristAttraction("Amalienborg", "Hvor Kongen og den royale familie bor, og man kan se Garderne gå runde.", "Copenhagen", List.of(TouristTags.BØRNEVENLIG)));
-        attractions.add(new TouristAttraction("Marmorkirken", "En imponerende kirke af marmor, kendt for sin runde kuppel.", "Copenhagen", List.of(TouristTags.GRATIS)));
-        attractions.add(new TouristAttraction("Christiansborg","Hvor politikerne styrer landet fra. Man kan komme ind og gå rundtur.", "Copenhagen", List.of(TouristTags.GRATIS)));
+
+        attractions.add(new TouristAttraction("Eiffel Tower", "An impressive tower in the heart of Paris, with a great view. Close to many other attractions.", "Paris", List.of(TouristTags.VERDENSKENDT, TouristTags.BØRNEVENLIG, TouristTags.SIGHTSEEING)));
+        attractions.add(new TouristAttraction("Great Wall of China", "An impressive wall spanning the northern parts of China. Spend hours walking the long paths, and taking in the impressive sights.", "Beijing", List.of(TouristTags.BØRNEVENLIG, TouristTags.GRATIS, TouristTags.MINDESMÆRKE, TouristTags.SIGHTSEEING, TouristTags.VERDENSKENDT)));
+        attractions.add(new TouristAttraction("The Little Mermaid", "A small statue of a mermaid, calling back to the great danish writer H.C.Andersen. Its since, almost, become a symbol of the city of Copenhagen itself.", "Copenhagen", List.of(TouristTags.BØRNEVENLIG, TouristTags.GRATIS, TouristTags.SIGHTSEEING)));
+        attractions.add(new TouristAttraction("Grand Canyon", "A historical site, of great value to both archeologists, geologists and tourists who flock to it for the great view.", "Arizona", List.of(TouristTags.GRATIS, TouristTags.SIGHTSEEING, TouristTags.BØRNEVENLIG, TouristTags.VERDENSKENDT, TouristTags.NATUR, TouristTags.OPLEVELSE)));
+        attractions.add(new TouristAttraction("Tower Of London","An old fort, having had funtioned as a tollhouse, a prison and a seat of governance. An important building to the city of London.", "London", List.of(TouristTags.DYR, TouristTags.MUSEUM, TouristTags.MINDESMÆRKE)));
+        attractions.add(new TouristAttraction("The Louvre", "A world famous museum and art gallery housing some of the most famous artworks in the world.", "Paris", (List.of(TouristTags.DYR, TouristTags.MUSEUM, TouristTags.KUNST, TouristTags.VERDENSKENDT))));
     }
 
     public List<TouristAttraction> getAllAttractions() { // Vis alle attractions

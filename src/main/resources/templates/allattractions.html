@@ -55,7 +55,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <a th:each="attraction : ${attractions}"
-           th:href="@{/touristguide/attractions/{name}(name=${attraction.name})}"
+           th:href="@{/touristguide/attractions/{name}(name=${attraction.getName()})}"
              class="group relative bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between min-h-[350px]">
 
             <div>
