@@ -48,8 +48,7 @@ public class TouristService {
         if (attraction != null) {
             repository.deleteAttraction(attraction);
             return attraction;
-        }
-        return null;
+        }return null;
     }
 
 }
