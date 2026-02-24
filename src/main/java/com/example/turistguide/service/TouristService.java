@@ -10,7 +10,6 @@ import java.util.List;
 
 @Service
 public class TouristService {
-
     private final TouristRepository repository;
 
     public TouristService(TouristRepository repository) {
@@ -18,14 +17,11 @@ public class TouristService {
     }
 
     public List<TouristAttraction> getAllAttractions() {
-
         return repository.getAllAttractions();
     }
 
     public TouristAttraction getAttractionByName(String name) {
-
         TouristAttraction attraction = repository.getAttractionByName(name);
-
         if (attraction != null && attraction.getName().equals(name)) {
             return attraction;
         }
@@ -33,28 +29,27 @@ public class TouristService {
     }
 
     public TouristAttraction createAttraction(TouristAttraction attraction) {
-
         for (TouristAttraction a : repository.getAllAttractions()) {
-
             if (attraction.getName().equalsIgnoreCase(a.getName())) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
             }
-        }
-        return repository.saveAttractionToDatabase(attraction);
+        }return repository.saveAttractionToDatabase(attraction);
     }
 
     public void updateAttraction(TouristAttraction attraction) {
-
         if (attraction == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
         }
-
         repository.updateAttraction(attraction);
     }
 
-    public void deleteAttraction(TouristAttraction attraction) {
-
-        repository.deleteAttraction(attraction);
+    public TouristAttraction deleteAttraction(String name) {
+        TouristAttraction attraction = repository.getAttractionByName(name);
+        if (attraction != null) {
+            repository.deleteAttraction(attraction);
+            return attraction;
+        }
+        return null;
     }
 
 }

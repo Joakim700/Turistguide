@@ -15,7 +15,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/touristguide")
 public class TouristController {
-
     private final TouristService service;
 
     public TouristController(TouristService touristService) {
@@ -34,7 +33,6 @@ public class TouristController {
 
     @GetMapping("/attractions")
     public String attractionList(Model model) {
-
         List<TouristAttraction> attractions = service.getAllAttractions();
         model.addAttribute("attractions", attractions);
         return "allattractions";
@@ -42,7 +40,6 @@ public class TouristController {
 
     @GetMapping("/attractions/{name}")
     public String getAttractionsByName(@PathVariable String name, Model model) {
-
         TouristAttraction attraction = service.getAttractionByName(name);
         model.addAttribute("attraction", attraction);
         return "attraction";
@@ -50,7 +47,6 @@ public class TouristController {
 
     @GetMapping("/attractions/add")
     public String addAttraction(Model model) {
-
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
         model.addAttribute("tags", TouristTags.values());
@@ -59,28 +55,19 @@ public class TouristController {
 
     @PostMapping("/attractions/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
-
         service.createAttraction(touristAttraction);
         return "redirect:/touristguide/attractions";
     }
 
     @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
-
         service.updateAttraction(updateAttraction);
         return "redirect:/touristguide/attractions";
     }
 
     @PostMapping("/attractions/delete/{name}")
-    public ResponseEntity<TouristAttraction> deleteAttraction(@RequestBody TouristAttraction attractionToBeDeleted) {
-
-        for (TouristAttraction attraction : service.getAllAttractions()) {
-
-            if (attraction.getName().equals(attractionToBeDeleted.getName())) {
-                service.deleteAttraction(attraction);
-                return ResponseEntity.ok(attractionToBeDeleted);
-            }
-        }
-        return ResponseEntity.notFound().build();
+    public String deleteAttraction(@PathVariable String name){
+        service.deleteAttraction(name);
+        return "redirect:/touristguide/attractions";
     }
 }
