@@ -2,7 +2,9 @@ package com.example.turistguide.service;
 
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.repository.TouristRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,15 +29,25 @@ public class TouristService {
         if (attraction != null && attraction.getName().equals(name)) {
             return attraction;
         }
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
     }
 
     public TouristAttraction createAttraction(TouristAttraction attraction) {
 
+        for (TouristAttraction a : repository.getAllAttractions()) {
+
+            if (attraction.getName().equalsIgnoreCase(a.getName())) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
+            }
+        }
         return repository.saveAttractionToDatabase(attraction);
     }
 
     public void updateAttraction(TouristAttraction attraction) {
+
+        if (attraction == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
+        }
 
         repository.updateAttraction(attraction);
     }
