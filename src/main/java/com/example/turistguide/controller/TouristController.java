@@ -39,11 +39,6 @@ public class TouristController {
     public String getAttractionsByName(@PathVariable String name, Model model) {
 
         TouristAttraction attraction = service.getAttractionByName(name);
-
-        if (attraction == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
-        }
-
         model.addAttribute("attraction", attraction);
         return "attraction";
     }
@@ -59,19 +54,10 @@ public class TouristController {
 
     @PostMapping("/attractions/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
-
-        for (TouristAttraction a : service.getAllAttractions()) {
-
-            if (touristAttraction.getName().equalsIgnoreCase(a.getName())) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
-            }
-        }
         service.createAttraction(touristAttraction);
         return "redirect:/touristguide/attractions";
     }
 
-
-    @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
 
         service.updateAttraction(updateAttraction);
@@ -83,16 +69,9 @@ public class TouristController {
     }
 
     @PostMapping("/attractions/delete/{name}")
-    public ResponseEntity<TouristAttraction> deleteAttraction(@RequestBody TouristAttraction attractionToBeDeleted) {
+    public String deleteAttraction(@ModelAttribute TouristAttraction attraction) {
 
-        for (TouristAttraction attraction : service.getAllAttractions()) {
-
-            if (attraction.getName().equals(attractionToBeDeleted.getName())) {
-                service.deleteAttraction(attraction);
-                return ResponseEntity.ok(attractionToBeDeleted);
-            }
-        }
-        return ResponseEntity.notFound().build();
+        service.deleteAttraction(attraction);
+        return "redirect:/attractions";
     }
-
 }
