@@ -2,9 +2,7 @@ package com.example.turistguide.repository;
 import com.example.turistguide.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.jar.Attributes;
 
 @Repository
 public class TouristRepository {

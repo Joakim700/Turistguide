@@ -2,9 +2,7 @@ package com.example.turistguide.model;
 
 import com.example.turistguide.repository.TouristTags;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 public class TouristAttraction {
