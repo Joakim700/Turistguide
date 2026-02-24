@@ -19,7 +19,6 @@ public class TouristAttraction {
     }
 
     public TouristAttraction(){
-        
     }
 
     public String getName() {
