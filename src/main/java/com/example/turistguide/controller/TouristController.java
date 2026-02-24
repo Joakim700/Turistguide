@@ -66,6 +66,7 @@ public class TouristController {
     public String editAttraction(@PathVariable String name, Model model){
         TouristAttraction attraction = service.getAttractionByName(name);
         model.addAttribute("attraction", attraction);
+        model.addAttribute("allTags", TouristTags.values());
         return "update-attraction";
     }
 
