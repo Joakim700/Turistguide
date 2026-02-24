@@ -3,7 +3,7 @@
 <head>
     <link href="../css/output.css" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title th:text="${attraction.getName()}">Attraction Name</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,7 +40,7 @@
         <th>Name</th>
         <th>Description</th>
         <th>By</th>
-        <th>Tags</th>
+	    <th></th>
     </tr>
     </thead>
     <tbody>
@@ -48,11 +48,35 @@
         <td th:text="${attraction.getName()}"></td>
         <td th:text="${attraction.getDescription()}"></td>
         <td th:text="${attraction.getCity()}"></td>
-        <td>
-            <a th:href="@{/touristguide/attractions/{name}/tags(name=${attraction.getName()})}"
-               th:text="${#strings.replace(#strings.replace(attraction.getTags().toString(), '[', ''), ']', '')}">
-            </a>
-        </td>
+<!--        <td>-->
+<!--            <a th:href="@{/touristguide/attractions/{name}/tags(name=${attraction.getName()})}"-->
+<!--               th:text="${#strings.replace(#strings.replace(attraction.getTags().toString(), '[', ''), ']', '')}">-->
+<!--            </a>-->
+<!--        </td>-->
+
+	    <td>
+		    <!--Edit-->
+		    <a>
+		    <button type="button">Edit</button>
+		    </a>
+		    <!--Edit-->
+		    <a>
+			    <button type="button">Update</button>
+		    </a>
+
+			<!--Tags-->
+		    <a th:href="@{/touristguide/attractions/{name}/tags(name=${attraction.getName()})}"
+		       style="display: inline-block">
+		       <button type="button">Tags</button>
+		    </a>
+
+			<!--Delete-->
+		    <form th:action="@{/touristguide/attractions/delete/{name}(name=${attraction.getName()})}"
+		          th:method="post"
+		          style="display: inline-block">
+			    <button type="submit">Delete</button>
+		    </form>
+	    </td>
     </tr>
     </tbody>
 </table>
