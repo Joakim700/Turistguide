@@ -18,7 +18,6 @@ public class TouristAttraction {
         this.description = description;
         this.city = city;
         this.tags = tags;
-
     }
 
     public TouristAttraction(){

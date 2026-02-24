@@ -68,7 +68,7 @@ public class TouristController {
     public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
 
         service.updateAttraction(updateAttraction);
-        return "redirect:touristguide/attractions";
+        return "redirect:/touristguide/attractions";
     }
 
     @PostMapping("/attractions/delete/{name}")
@@ -83,5 +83,4 @@ public class TouristController {
         }
         return ResponseEntity.notFound().build();
     }
-
 }
