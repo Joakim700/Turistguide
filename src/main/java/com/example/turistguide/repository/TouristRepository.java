@@ -29,7 +29,7 @@ public class TouristRepository {
 
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
         for (TouristAttraction attraction : attractions) {
-            if (attraction.getName().replaceAll("\\s+","").equalsIgnoreCase(name)) {//Ignores spaces and letter case for easier search
+            if (attraction.getName().equalsIgnoreCase(name)) {//Ignores spaces and letter case for easier search
                 return attraction;
             }
         }return null;

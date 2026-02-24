@@ -3,7 +3,6 @@ package com.example.turistguide.controller;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.repository.TouristTags;
 import com.example.turistguide.service.TouristService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
