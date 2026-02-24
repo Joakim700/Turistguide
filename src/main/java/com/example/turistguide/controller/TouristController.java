@@ -44,18 +44,13 @@ public class TouristController {
     public String getAttractionsByName(@PathVariable String name, Model model) {
 
         TouristAttraction attraction = service.getAttractionByName(name);
-
-        if (attraction == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
-        }
-
         model.addAttribute("attraction", attraction);
         return "attraction";
     }
 
-
     @GetMapping("/attractions/add")
     public String addAttraction(Model model) {
+
         TouristAttraction attraction = new TouristAttraction();
         model.addAttribute("attraction", attraction);
         model.addAttribute("tags", TouristTags.values());
@@ -65,26 +60,15 @@ public class TouristController {
     @PostMapping("/attractions/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
 
-        for (TouristAttraction a : service.getAllAttractions()) {
-
-            if (touristAttraction.getName().equalsIgnoreCase(a.getName())) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
-            }
-        }
         service.createAttraction(touristAttraction);
         return "redirect:/touristguide/attractions";
     }
-
 
     @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
 
         service.updateAttraction(updateAttraction);
-
-        if (updateAttraction == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
-        }
-        return "redirect:/update";
+        return "redirect:touristguide/attractions";
     }
 
     @PostMapping("/attractions/delete/{name}")
