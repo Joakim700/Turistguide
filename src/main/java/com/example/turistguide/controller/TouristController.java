@@ -58,12 +58,6 @@ public class TouristController {
         return "addnewattraction";
     }
 
-    @PostMapping("/attractions/save")
-    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
-        service.createAttraction(touristAttraction);
-        return "redirect:/touristguide/attractions";
-    }
-
     @GetMapping("/attractions/{name}/edit")
     public String editAttraction(@PathVariable String name, Model model){
         TouristAttraction attraction = service.getAttractionByName(name);
@@ -71,6 +65,13 @@ public class TouristController {
         model.addAttribute("allTags", TouristTags.values());
         return "update-attraction";
     }
+
+    @PostMapping("/attractions/save")
+    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+        service.createAttraction(touristAttraction);
+        return "redirect:/touristguide/attractions";
+    }
+
 
     @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
