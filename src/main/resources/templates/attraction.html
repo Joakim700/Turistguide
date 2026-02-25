@@ -1,78 +1,95 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="../css/output.css" rel="stylesheet">
+    <link th:href="@{/css/output.css}" rel="stylesheet">
     <meta charset="UTF-8">
     <title th:text="${attraction.getName()}">Attraction Name</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-        }
-
-        h1 {
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 80%;
-        }
-
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-            font-size: 18px;
-        }
-
-        th {
-            font-weight: bold;
-        }
-    </style>
 </head>
-<body>
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>By</th>
-	    <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td th:text="${attraction.getName()}"></td>
-        <td th:text="${attraction.getDescription()}"></td>
-        <td th:text="${attraction.getCity()}"></td>
+<body class="min-h-screen flex flex-col bg-gray-50">
+<header class="bg-gray-200 shadow-md sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between" aria-label="Main Navigation">
 
-	    <td>
+        <h1 class="text-4xl font-light tracking-wide text-black">
+            TOURIST GUIDE
+        </h1>
 
-		    <!--Update-->
-		    <a th:href="@{/touristguide/attractions/{name}/edit(name=${attraction.getName()})}"
-		       style="display: inline-block">
-			    <button type="button">Update</button>
-		    </a>
+        <ul class="flex space-x-8 text-lg text-red-700">
+            <li>
+                <a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/touristguide/attractions}"  class="hover:text-black transition duration-200">
+                    Show Attractions
+                </a>
+            </li>
+            <li>
+                <a href="#" class="hover:text-black transition duration-200">
+                    Favourites
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">
+                    About Us
+                </a>
+            </li>
+        </ul>
 
-			<!--Tags-->
-		    <a th:href="@{/touristguide/attractions/{name}/tags(name=${attraction.getName()})}"
-		       style="display: inline-block">
-		       <button type="button">Tags</button>
-		    </a>
+    </nav>
+</header>
 
-			<!--Delete-->
-		    <form th:action="@{/touristguide/attractions/delete/{name}(name=${attraction.getName()})}"
-		          th:method="post"
-		          style="display: inline-block">
-			    <button type="submit">Delete</button>
-		    </form>
-	    </td>
-    </tr>
-    </tbody>
-</table>
+<main class="flex-grow flex items-center justify-center p-6">
+    <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
 
+        <div class="p-8 border-b border-gray-50">
+            <div class="flex justify-between items-start">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-red-600 bg-red-50 px-3 py-1 rounded-full">
+                        Attraction Details
+                    </span>
+                    <h2 class="text-4xl font-extrabold text-gray-900 mt-3" th:text="${attraction.name}">
+                        Attraction Name
+                    </h2>
+                    <p class="flex items-center text-gray-500 mt-2 italic">
+                        <span class="font-medium text-gray-700" th:text="${attraction.city}">City Name</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-8 bg-gray-50/50">
+            <h3 class="text-sm font-semibold text-gray-400 uppercase mb-2">Description</h3>
+            <p class="text-gray-700 text-lg leading-relaxed" th:text="${attraction.description}">
+                The description goes here. By moving it out of a table, we give the text room to breathe and make it much easier to read.
+            </p>
+        </div>
+
+        <div class="p-6 bg-white flex flex-wrap items-center justify-between gap-8">
+
+            <div class="flex gap-8"> <a th:href="@{/touristguide/attractions/{name}/edit(name=${attraction.name})}"
+                                        class="flex items-center justify-center px-6 py-3 bg-gray-900 text-black rounded-xl font-bold hover:bg-gray-800 transition-all active:scale-95 shadow-md">
+                Update Details
+            </a>
+
+                <a th:href="@{/touristguide/attractions/{name}/tags(name=${attraction.name})}"
+                   class="flex items-center justify-center px-6 py-3 bg-white text-gray-700 border-2 border-gray-100 rounded-xl font-bold hover:border-red-200 hover:text-red-600 transition-all active:scale-95">
+                    View Tags
+                </a>
+        </div>
+
+            <form th:action="@{/touristguide/attractions/delete/{name}(name=${attraction.name})}"
+                  th:method="post"
+                  onsubmit="return confirm('Wait! Are you sure you want to delete this?');">
+                <button type="submit"
+                        class="px-6 py-3 text-red-500 font-bold hover:bg-red-50 rounded-xl transition-colors">
+                    Delete Attraction
+                </button>
+            </form>
+
+        </div>
+    </div>
+</main>
 </body>
 </html>
