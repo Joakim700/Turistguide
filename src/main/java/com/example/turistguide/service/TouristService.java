@@ -32,14 +32,10 @@ public class TouristService {
     }
 
     public void createAttraction(TouristAttraction attraction) {
-
-        for (TouristAttraction a : repository.getAllAttractions()) {
-
-            if (attraction.getName().equalsIgnoreCase(a.getName())) {
-                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
-            }
+        if (repository.getAttractionByName(attraction.getName()) != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Already exists");
         }
-        repository.saveAttractionToDatabase(attraction);
+        repository.saveAttraction(attraction);
     }
 
 

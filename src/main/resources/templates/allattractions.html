@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link href="../css/output.css" rel="stylesheet">
     <title>Tourist Attractions</title>
+</head>
 
 <body class="bg-white">
 
@@ -64,7 +65,7 @@
 
                     </span>
                     <span class="text-red-700 text-[10px] font-bold uppercase tracking-widest"
-                          th:text="${#strings.replace(#strings.replace(attraction.getTags(), '[', ''), ']', '')}">
+                           th:text="${#strings.listJoin(attraction.getTags(), ', ')}">
 
                     </span>
                 </div>
