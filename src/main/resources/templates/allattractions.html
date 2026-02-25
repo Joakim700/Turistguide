@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang ="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link href="../css/output.css" rel="stylesheet">
@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a th:href="@{/touristguide/attractions}"  class="hover:text-black transition duration-200">
+                <a th:href="@{/touristguide/attractions}" class="hover:text-black transition duration-200">
                     Show Attractions
                 </a>
             </li>
@@ -40,37 +40,37 @@
 
     <div class="mb-16 flex justify-between items-end">
         <div>
-            <h2 class="text-xs uppercase tracking-[0.3em] text-red-700 font-bold mb-3">Copenhagen Collection</h2>
-            <h1 class="text-5xl font-light tracking-tight text-black">Local Attractions</h1>
+            <h2 class="text-xs uppercase tracking-[0.3em] text-red-700 font-bold mb-3">Worldwide Attractions</h2>
+            <h1 class="text-5xl font-light tracking-tight text-black">Attractions</h1>
         </div>
-        <div class="text-right hidden md:block border-r-2 border-red-700 pr-4">
-            <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight">Curated by<br>Citizens</p>
-        </div>
+        <a th:href="@{/touristguide/about-us}" class="text-right hidden md:block border-r-2 border-red-700 pr-4">
+            <button class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight hover:text-black transition duration-200">
+                Curated by <br> The Boys
+            </button>
+        </a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
         <a th:each="attraction : ${attractions}"
            th:href="@{/touristguide/attractions/{name}(name=${attraction.getName()})}"
-             class="group relative bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between min-h-[350px]">
+           class="group relative bg-white border border-gray-100 p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between min-h-[350px]">
 
             <div>
                 <div class="flex justify-between items-start mb-6">
-                    <span class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold" th:text="${attraction.getCity()}">
-
-                    </span>
-                    <span class="text-red-700 text-[10px] font-bold uppercase tracking-widest"
-                           th:text="${#strings.listJoin(attraction.getTags(), ', ')}">
-
+                    <span class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold"
+                          th:text="${attraction.getCity()}">
                     </span>
                 </div>
-
-                <h3 class="text-2xl font-medium text-black mb-3 group-hover:text-red-700 transition-colors" th:text="${attraction.getName()}">
-
+                <h3 class="text-[30px] font-bold uppercase text-black mb-3 group-hover:text-red-700 transition-colors"
+                    th:text="${attraction.getName()}">
                 </h3>
+                <span class="text-red-700 text-[12px] font-medium uppercase tracking-widest"
+                      th:text="${#strings.listJoin(attraction.getTags(), ', ')}">
+                </span>
 
-                <p class="text-gray-500 text-sm leading-relaxed" th:text="${attraction.getDescription()}">
-
+                <p
+                        class="text-gray-500 text-sm leading-relaxed" th:text="${attraction.getDescription()}">
                 </p>
             </div>
 
@@ -80,7 +80,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg"
                          class="h-5 w-5 transform group-hover:translate-x-1 transition-transform text-red-700"
                          fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                     </svg>
                 </div>
             </div>
@@ -88,38 +89,5 @@
 
     </div>
 </main>
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>By</th>
-        <th>Tags</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="attraction : ${attractions}">
-        <td th:text="${attraction.getName()}">Attraction Name</td>
-        <td th:text="${attraction.getDescription()}">Attraction Description</td>
-        <td th:text="${attraction.getCity()}">By</td>
-        <td th:text="${attraction.getTags()}">Tags</td>
-    </tr>
-    </tbody>
-</table>
--->
-
 </body>
 </html>
