@@ -48,7 +48,7 @@ public class TouristService {
         if (attraction == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
         }
-        return repository.updateAttraction(attraction);
+        repository.updateAttraction(attraction);
     }
 
     public void deleteAttraction(String name) {
