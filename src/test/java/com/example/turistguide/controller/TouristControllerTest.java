@@ -140,7 +140,7 @@ class TouristControllerTest {
     }
 
     @Test
-    void shouldDelete() throws Exception{
+    void shouldDelete(){
         TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
 
         touristService.createAttraction(mockAttraction);

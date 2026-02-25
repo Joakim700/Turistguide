@@ -12,12 +12,12 @@
 <form th:action="@{/touristguide/attractions/update}" th:object="${attraction}"
       method="post">
 		<!--Name-->
-	<label for="name">Name</label>
-	<input type="text" id="name" th:field="*{name}"/>
+	<label for="name">Name (cannot be changed)</label>
+	<input type="text" id="name" th:field="*{name}" readonly style="background-color: #f0f0f0;"/>
 	<br>
 		<!--Description-->
 	<label for="description">Description</label>
-	<textarea id="description" th:field="*{description}" />
+	<textarea id="description" th:field="*{description}"></textarea>
 	<br>
 		<!--City-->
 	<label for="city">City</label>

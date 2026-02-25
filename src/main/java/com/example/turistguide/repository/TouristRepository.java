@@ -35,16 +35,16 @@ public class TouristRepository {
         }return null;
     }
 
-    public TouristAttraction updateAttraction(TouristAttraction attraction) {
-        TouristAttraction updateAttraction = getAttractionByName(attraction.getName());
-        attractions.remove(updateAttraction);
-        attractions.add(attraction);
-        return attraction;
+    public void updateAttraction(TouristAttraction updateattraction) {
+        TouristAttraction existingAttraction = getAttractionByName(updateattraction.getName());
+        if (existingAttraction != null) {
+            attractions.remove(existingAttraction);
+            attractions.add(updateattraction);
+        }
     }
 
-    public TouristAttraction saveAttractionToDatabase(TouristAttraction attraction) { // Add new Attraction
+    public void saveAttraction(TouristAttraction attraction) {
         attractions.add(attraction);
-        return attraction;
     }
 
     public void deleteAttraction(TouristAttraction attraction) {

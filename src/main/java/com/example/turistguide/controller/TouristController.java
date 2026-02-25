@@ -6,17 +6,16 @@ import com.example.turistguide.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
 import java.util.List;
 
 @Controller
 @RequestMapping("/touristguide")
 public class TouristController {
+
     private final TouristService service;
 
-    public TouristController(TouristService touristService) {
-        this.service = touristService;
+    public TouristController(TouristService service) {
+        this.service = service;
     }
 
     @GetMapping("/homepage")
@@ -68,6 +67,7 @@ public class TouristController {
 
     @PostMapping("/attractions/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+
         service.createAttraction(touristAttraction);
         return "redirect:/touristguide/attractions";
     }
@@ -75,12 +75,14 @@ public class TouristController {
 
     @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
+
         service.updateAttraction(attraction);
         return "redirect:/touristguide/attractions";
     }
 
     @PostMapping("/attractions/delete/{name}")
     public String deleteAttraction(@PathVariable String name){
+
         service.deleteAttraction(name);
         return "redirect:/touristguide/attractions";
     }

@@ -40,7 +40,6 @@ public class TouristService {
             }
         }
         return repository.saveAttractionToDatabase(attraction);
-    }
 
 
     public TouristAttraction updateAttraction(TouristAttraction attraction) {
