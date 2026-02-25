@@ -71,6 +71,21 @@ class TouristControllerTest {
                 .andExpect(view().name("addnewattraction"));
     }
 
+    @Test
+    void shouldShowEditByNamePage() throws Exception {
+
+        TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
+
+        Mockito.when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
+
+        mockMvc.perform(get("/touristguide/attractions/{name}/edit", "Eiffel Tower"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("update-attraction"))
+                .andExpect(model().attribute("attraction", mockAttraction));
+
+
+    }
+
 //    @Test
 //    void shouldSaveAttraction() throws Exception {
 //        mockMvc.perform(post("/touristguide/attractions/save")
