@@ -2,6 +2,7 @@ package com.example.turistguide.service;
 
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.repository.TouristRepository;
+import com.example.turistguide.repository.TouristTags;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -41,12 +42,13 @@ public class TouristService {
         return repository.saveAttractionToDatabase(attraction);
     }
 
+
     public void updateAttraction(TouristAttraction attraction) {
 
         if (attraction == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
         }
-        repository.updateAttraction(attraction);
+        return repository.updateAttraction(attraction);
     }
 
     public TouristAttraction deleteAttraction(String name) {
@@ -60,4 +62,7 @@ public class TouristService {
         return null;
     }
 
+    public List<TouristTags> getAllTags(){
+        return repository.getTags();
+    }
 }
