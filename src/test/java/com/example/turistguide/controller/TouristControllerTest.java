@@ -14,17 +14,18 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(TouristController.class)
@@ -35,6 +36,8 @@ class TouristControllerTest {
 
     @MockitoBean
     TouristService touristService;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
     void shouldShowAttractions() throws  Exception {
@@ -99,6 +102,20 @@ class TouristControllerTest {
         assertEquals("Attraction in Paris", captured.getDescription());
         assertEquals("Paris", captured.getCity());
         assertTrue(captured.getTags().toString().contains("GRATIS"));
+    }
+
+    @Test
+    void shouldUpdateAttraction() throws Exception {
+
+        mockMvc.perform(post("/touristguide/attractions/update")
+                .param("name", "Eiffel Tower")
+                .param("description", "Tower")
+                .param("city", "Paris")
+                .param("tags", "GRATIS"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/touristguide/attractions"));
+
+        verify(touristService, times(1)).updateAttraction(any(TouristAttraction.class));
     }
 
     @Test
