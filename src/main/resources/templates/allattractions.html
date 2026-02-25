@@ -61,20 +61,20 @@
             <div>
                 <div class="flex justify-between items-start mb-6">
                     <span class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold" th:text="${attraction.getCity()}">
-                        Copenhagen
+
                     </span>
                     <span class="text-red-700 text-[10px] font-bold uppercase tracking-widest"
                           th:text="${#strings.replace(#strings.replace(attraction.getTags(), '[', ''), ']', '')}">
-                        GRATIS
+
                     </span>
                 </div>
 
                 <h3 class="text-2xl font-medium text-black mb-3 group-hover:text-red-700 transition-colors" th:text="${attraction.getName()}">
-                    Nyhavn
+
                 </h3>
 
                 <p class="text-gray-500 text-sm leading-relaxed" th:text="${attraction.getDescription()}">
-                    Gammel havn, tæt på centrum. Mange restauranter og mulighed for kanalrundfart.
+
                 </p>
             </div>
 

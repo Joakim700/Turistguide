@@ -5,6 +5,7 @@ import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.repository.TouristTags;
 import com.example.turistguide.service.TouristService;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -14,7 +15,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.Locale;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(TouristController.class)
@@ -66,5 +70,22 @@ class TouristControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("addnewattraction"));
     }
+
+//    @Test
+//    void shouldSaveAttraction() throws Exception {
+//        mockMvc.perform(post("/touristguide/attractions/save")
+//                        .param("Eiffel Tower")
+//                        .param(""))
+//                .andExpect(status().is3xxRedirection())
+//                .andExpect(view().name("redirect:/touristguide/attractions"));
+//
+//        ArgumentCaptor<TouristAttraction> captor = ArgumentCaptor.forClass(TouristAttraction.class);
+//        verify(touristService).createAttraction(captor.capture());
+//
+//        TouristAttraction captured = captor.capture();
+//        captured.getName();
+//        assertEquals(captured)
+//    }
+
 
 }

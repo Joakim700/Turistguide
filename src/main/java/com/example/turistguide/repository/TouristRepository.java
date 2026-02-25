@@ -37,8 +37,9 @@ public class TouristRepository {
 
     public TouristAttraction updateAttraction(TouristAttraction attraction) {
         TouristAttraction updateAttraction = getAttractionByName(attraction.getName());
-        attractions.remove(updateAttraction);
+        deleteAttraction(updateAttraction);
         attractions.add(attraction);
+
         return attraction;
     }
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -63,9 +64,17 @@ public class TouristController {
         return "redirect:/touristguide/attractions";
     }
 
+    @GetMapping("/attractions/{name}/edit")
+    public String editAttraction(@PathVariable String name, Model model){
+        TouristAttraction attraction = service.getAttractionByName(name);
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("allTags", TouristTags.values());
+        return "update-attraction";
+    }
+
     @PostMapping("/attractions/update")
-    public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
-        service.updateAttraction(updateAttraction);
+    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
+        service.updateAttraction(attraction);
         return "redirect:/touristguide/attractions";
     }
 
