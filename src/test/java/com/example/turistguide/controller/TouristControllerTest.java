@@ -100,7 +100,8 @@ class TouristControllerTest {
         assertEquals("Paris", captured.getCity());
         assertTrue(captured.getTags().toString().contains("GRATIS"));
     }
-  
+
+    @Test
     void shouldShowEditByNamePage() throws Exception {
 
         TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
@@ -122,7 +123,7 @@ class TouristControllerTest {
     }
 
     @Test
-    void shouldDelete() throws Exception{
+    void shouldDelete(){
         TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
 
         touristService.createAttraction(mockAttraction);
