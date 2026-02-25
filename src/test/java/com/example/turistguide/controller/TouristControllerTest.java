@@ -6,26 +6,17 @@ import com.example.turistguide.repository.TouristTags;
 import com.example.turistguide.service.TouristService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatcher;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import tools.jackson.databind.ObjectMapper;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(TouristController.class)
@@ -36,11 +27,9 @@ class TouristControllerTest {
 
     @MockitoBean
     TouristService touristService;
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @Test
-    void shouldShowAttractions() throws  Exception {
+    void shouldShowAttractions() throws Exception {
         mockMvc.perform(get("/touristguide/attractions"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("allattractions"));
@@ -108,10 +97,10 @@ class TouristControllerTest {
     void shouldUpdateAttraction() throws Exception {
 
         mockMvc.perform(post("/touristguide/attractions/update")
-                .param("name", "Eiffel Tower")
-                .param("description", "Tower")
-                .param("city", "Paris")
-                .param("tags", "GRATIS"))
+                        .param("name", "Eiffel Tower")
+                        .param("description", "Tower")
+                        .param("city", "Paris")
+                        .param("tags", "GRATIS"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/touristguide/attractions"));
 
@@ -132,7 +121,7 @@ class TouristControllerTest {
     }
 
     @Test
-    void shouldRedirectDelete() throws Exception{
+    void shouldRedirectDelete() throws Exception {
         mockMvc.perform(post("/touristguide/attractions/delete/{name}", "Eiffel Tower"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/touristguide/attractions"));
@@ -140,7 +129,7 @@ class TouristControllerTest {
     }
 
     @Test
-    void shouldDelete(){
+    void shouldDelete() {
         TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
 
         touristService.createAttraction(mockAttraction);
