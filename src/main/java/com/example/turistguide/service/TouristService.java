@@ -21,7 +21,9 @@ public class TouristService {
     }
 
     public TouristAttraction getAttractionByName(String name) {
+
         TouristAttraction attraction = repository.getAttractionByName(name);
+
         if (attraction != null && attraction.getName().equals(name)) {
             return attraction;
         }
@@ -29,14 +31,18 @@ public class TouristService {
     }
 
     public TouristAttraction createAttraction(TouristAttraction attraction) {
+
         for (TouristAttraction a : repository.getAllAttractions()) {
+
             if (attraction.getName().equalsIgnoreCase(a.getName())) {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
             }
-        }return repository.saveAttractionToDatabase(attraction);
+        }
+        return repository.saveAttractionToDatabase(attraction);
     }
 
     public void updateAttraction(TouristAttraction attraction) {
+
         if (attraction == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
         }
@@ -44,11 +50,14 @@ public class TouristService {
     }
 
     public TouristAttraction deleteAttraction(String name) {
+
         TouristAttraction attraction = repository.getAttractionByName(name);
+
         if (attraction != null) {
             repository.deleteAttraction(attraction);
             return attraction;
-        }return null;
+        }
+        return null;
     }
 
 }
