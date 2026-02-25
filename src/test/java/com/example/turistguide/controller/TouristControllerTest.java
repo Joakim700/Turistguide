@@ -18,8 +18,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -110,8 +111,6 @@ class TouristControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("update-attraction"))
                 .andExpect(model().attribute("attraction", mockAttraction));
-
-
     }
 
     @Test
