@@ -58,7 +58,4 @@ public class TouristService {
         }
     }
 
-//    public List<TouristTags> getAllTags(){
-//        return repository.getTags();
-//    }
 }
