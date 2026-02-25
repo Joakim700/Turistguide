@@ -1,44 +1,107 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title th:text="'Edit: ' + ${attraction.getName()}">Editing Attraction</title>
-    <link href="../css/output.css" rel="stylesheet">
+	<meta charset="UTF-8">
+	<title th:text="'Edit: ' + ${attraction.getName()}">Editing Attraction</title>
+	<link th:href="@{/css/output.css}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-white">
 
-<h1 th:text="'Editing - ' + ${attraction.getName()}">Attraction Name</h1>
+<header class="bg-gray-200 shadow-md">
+	<nav class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+		<h1 class="text-4xl font-light tracking-wide text-black">TOURIST GUIDE</h1>
+		<ul class="flex space-x-8 text-lg text-red-700">
+			<li><a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">Home</a></li>
+			<li><a th:href="@{/touristguide/attractions}" class="hover:text-black transition duration-200">Show Attractions</a></li>
+			<li><a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">About Us</a></li>
+		</ul>
+	</nav>
+</header>
 
-<form th:action="@{/touristguide/attractions/update}" th:object="${attraction}"
-      method="post">
-		<!--Name-->
-	<label for="name">Name (cannot be changed)</label>
-	<input type="text" id="name" th:field="*{name}" readonly style="background-color: #f0f0f0;"/>
-	<br>
-		<!--Description-->
-	<label for="description">Description</label>
-	<textarea id="description" th:field="*{description}"></textarea>
-	<br>
-		<!--City-->
-	<label for="city">City</label>
-	<input type="text" id="city" th:field="*{city}">
-	<br>
-		<!--Tags-->
-	<label>Tags:</label>
-	<div th:each="tag : ${allTags}" class="tag-item">
-		<label>
-			<input type="checkbox"
-				   th:value="${tag}"
-				   th:field="*{tags}"
-				   th:id="${'tag-' + tag}" />
-			<span th:text="${tag}">Tag Name</span>
-		</label>
+<main class="max-w-4xl mx-auto px-8 py-12">
+
+	<h2 class="text-3xl font-light text-gray-900 mb-8" th:text="'Editing - ' + ${attraction.getName()}">Attraction Name</h2>
+
+	<form th:action="@{/touristguide/attractions/update}" th:object="${attraction}" method="post" class="space-y-6 bg-gray-50 p-8 rounded-md shadow-md">
+
+		<!-- Name -->
+		<div class="flex flex-col">
+			<label for="name" class="mb-2 font-xl text-gray-700">Name (cannot be changed)</label>
+			<input type="text" id="name" th:field="*{name}" readonly
+			       class="border border-gray-300 p-2 rounded bg-gray-200 cursor-not-allowed " />
+		</div>
+
+		<!-- Description -->
+		<div class="flex flex-col">
+			<label for="description" class="mb-2 font-xl text-gray-700">Description</label>
+			<textarea id="description" th:field="*{description}" rows="4"
+			          class="border border-gray-300 p-2 rounded focus:ring-2 focus:ring-red-700"></textarea>
+		</div>
+
+		<!-- City -->
+		<div class="flex flex-col">
+			<label for="city" class="mb-2 font-xl text-gray-700">City</label>
+			<input type="text" id="city" th:field="*{city}"
+			       class="border border-gray-300 p-2 rounded focus:ring-2 focus:ring-red-700" />
+		</div>
+
+		<!-- Tags -->
+		<div class="flex flex-col">
+			<span class="mb-2 font-xl text-gray-700">Tags</span>
+			<div class="flex flex-wrap gap-7 px-7">
+				<div th:each="tag : ${allTags}" class="flex items-center px-9 m-10">
+					<input type="checkbox"
+					       th:value="${tag}"
+					       th:field="*{tags}"
+					       th:id="${'tag-' + tag}"
+					       class="h-5 w-5 text-red-700 focus:ring-red-700 border-gray-300 rounded-full"/>
+					<label th:for="${'tag-' + tag}" th:text="${tag}" class="ml-2 text-gray-700" ></label>
+				</div>
+			</div>
+		</div>
+
+		<!-- Submit -->
+		<button type="submit"
+		        class="px-4 py-2 bg-black text-white rounded-full hover:bg-red-700 transition duration-300">
+			Save Changes
+		</button>
+	</form>
+
+	<!-- Back link -->
+	<p class="mt-6">
+		<a th:href="@{/touristguide/attractions}" class="text-red-700 hover:text-black transition py-7">
+			← Back to Attractions
+		</a>
+	</p>
+
+</main>
+
+<footer class="border-t border-gray-100 bg-white mt-12">
+	<div class="max-w-7xl mx-auto px-8 py-12">
+		<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+			<div>
+				<h2 class="text-2xl font-light tracking-wide text-black">TOURIST GUIDE</h2>
+				<p class="text-gray-500 mt-2 max-w-xs">
+					Curating the best experiences for the modern traveler.
+				</p>
+			</div>
+
+			<ul class="flex flex-wrap gap-x-8 gap-y-4 text-red-700">
+				<li><a th:href="@{/touristguide/attractions}" class="hover:text-black transition duration-200">Attractions</a></li>
+				<li><a href="#" class="hover:text-black transition duration-200">Privacy Policy</a></li>
+				<li><a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">Contact</a></li>
+			</ul>
+		</div>
+
+		<div class="mt-12 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between text-sm text-gray-400">
+			<p>&copy; 2026 Tourist Guide. All rights reserved.</p>
+			<div class="flex space-x-6 mt-4 md:mt-0">
+				<a href="#" class="hover:text-black transition">Instagram</a>
+				<a href="#" class="hover:text-black transition">Twitter</a>
+			</div>
+		</div>
 	</div>
-	<!--Submit. I need these comments to understand and remember fr.-->
-	<button type="submit">Save Changes</button>
-</form>
+</footer>
 
-<!--Return to Attraction-->
-<p><a th:href="@{/touristguide/attractions}">← Back to Attractions</a></p>
 </body>
 </html>

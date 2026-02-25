@@ -6,7 +6,9 @@ import com.example.turistguide.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 
 @Controller
 @RequestMapping("/touristguide")
@@ -24,7 +26,7 @@ public class TouristController {
     }
 
     @GetMapping("/about-us")
-    public String getAboutUs(){
+    public String getAboutUs() {
         return "about-us";
     }
 
@@ -58,7 +60,7 @@ public class TouristController {
     }
 
     @GetMapping("/attractions/{name}/edit")
-    public String editAttraction(@PathVariable String name, Model model){
+    public String editAttraction(@PathVariable String name, Model model) {
         TouristAttraction attraction = service.getAttractionByName(name);
         model.addAttribute("attraction", attraction);
         model.addAttribute("allTags", TouristTags.values());
@@ -72,7 +74,6 @@ public class TouristController {
         return "redirect:/touristguide/attractions";
     }
 
-
     @PostMapping("/attractions/update")
     public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
 
@@ -81,7 +82,7 @@ public class TouristController {
     }
 
     @PostMapping("/attractions/delete/{name}")
-    public String deleteAttraction(@PathVariable String name){
+    public String deleteAttraction(@PathVariable String name) {
 
         service.deleteAttraction(name);
         return "redirect:/touristguide/attractions";

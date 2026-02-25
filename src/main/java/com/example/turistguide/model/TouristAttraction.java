@@ -19,8 +19,7 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
-
-    public TouristAttraction(){
+    public TouristAttraction() {
     }
 
     public String getName() {
@@ -31,12 +30,10 @@ public class TouristAttraction {
         return description;
     }
 
-    // Request Update
     public void setName(String name) {
         this.name = name;
     }
 
-    // Request Update
     public void setDescription(String description) {
         this.description = description;
     }
