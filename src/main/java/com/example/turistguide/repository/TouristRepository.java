@@ -35,11 +35,11 @@ public class TouristRepository {
         }return null;
     }
 
-    public void updateAttraction(TouristAttraction updateattraction) {
-        TouristAttraction existingAttraction = getAttractionByName(updateattraction.getName());
+    public void updateAttraction(TouristAttraction updateAttraction) {
+        TouristAttraction existingAttraction = getAttractionByName(updateAttraction.getName());
         if (existingAttraction != null) {
             attractions.remove(existingAttraction);
-            attractions.add(updateattraction);
+            attractions.add(updateAttraction);
         }
     }
 

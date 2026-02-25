@@ -31,7 +31,7 @@ public class TouristService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
     }
 
-    public TouristAttraction createAttraction(TouristAttraction attraction) {
+    public void createAttraction(TouristAttraction attraction) {
 
         for (TouristAttraction a : repository.getAllAttractions()) {
 
@@ -39,26 +39,25 @@ public class TouristService {
                 throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
             }
         }
-        return repository.saveAttractionToDatabase(attraction);
+        repository.saveAttraction(attraction);
+    }
 
 
-    public TouristAttraction updateAttraction(TouristAttraction attraction) {
+    public void updateAttraction(TouristAttraction attraction) {
 
         if (attraction == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
         }
-        return repository.updateAttraction(attraction);
+        repository.updateAttraction(attraction);
     }
 
-    public TouristAttraction deleteAttraction(String name) {
+    public void deleteAttraction(String name) {
 
         TouristAttraction attraction = repository.getAttractionByName(name);
 
         if (attraction != null) {
             repository.deleteAttraction(attraction);
-            return attraction;
         }
-        return null;
     }
 
     public List<TouristTags> getAllTags(){
