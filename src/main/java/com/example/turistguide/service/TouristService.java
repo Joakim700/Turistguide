@@ -43,11 +43,11 @@ public class TouristService {
     }
 
 
-    public void updateAttraction(TouristAttraction attraction) {
+        public void updateAttraction(TouristAttraction attraction) {
 
-        if (attraction == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
-        }
+            if (attraction == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
+            }
         repository.updateAttraction(attraction);
     }
 
