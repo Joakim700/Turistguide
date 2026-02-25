@@ -90,8 +90,6 @@ class TouristControllerTest {
 
     @Test
     void shouldRedirectDelete() throws Exception{
-        TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
-
         mockMvc.perform(post("/touristguide/attractions/delete/{name}", "Eiffel Tower"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/touristguide/attractions"));
