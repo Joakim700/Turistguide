@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -71,8 +72,8 @@ public class TouristController {
     }
 
     @PostMapping("/attractions/update")
-    public String updateAttraction(@ModelAttribute TouristAttraction updateAttraction) {
-        service.updateAttraction(updateAttraction);
+    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
+        service.updateAttraction(attraction);
         return "redirect:/touristguide/attractions";
     }
 

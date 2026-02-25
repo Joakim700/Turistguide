@@ -37,11 +37,11 @@ public class TouristService {
         }return repository.saveAttractionToDatabase(attraction);
     }
 
-    public void updateAttraction(TouristAttraction attraction) {
+    public TouristAttraction updateAttraction(TouristAttraction attraction) {
         if (attraction == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
         }
-        repository.updateAttraction(attraction);
+        return repository.updateAttraction(attraction);
     }
 
     public TouristAttraction deleteAttraction(String name) {
