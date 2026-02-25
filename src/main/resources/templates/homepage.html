@@ -23,12 +23,7 @@
             </li>
             <li>
                 <a th:href="@{/touristguide/attractions}"  class="hover:text-black transition duration-200">
-                    Show Attractions
-                </a>
-            </li>
-            <li>
-                <a href="#" class="hover:text-black transition duration-200">
-                    Favourites
+                    Attractions
                 </a>
             </li>
             <li>
@@ -40,8 +35,6 @@
 
     </nav>
 </header>
-
-<!-- th:src="@{../images/earth.jpg}" -->
 
 <main class="max-w-7xl mx-auto px-8 py-12">
 
@@ -62,9 +55,12 @@
             <p class="text-gray-600 text-lg leading-relaxed">
                 From hidden cobblestone alleys to vibrant city centers, our guide provides curated insights to make your next journey unforgettable.
             </p>
-            <button class="px-8 py-3 bg-black text-white hover:bg-red-700 transition duration-300">
-                Start Exploring
-            </button>
+            <a th:href="@{/touristguide/attractions}">
+                <button class="px-8 py-3 bg-black text-white hover:bg-red-700 transition duration-300">
+                    Start Exploring
+                </button>
+            </a>
+
         </div>
     </div>
 
