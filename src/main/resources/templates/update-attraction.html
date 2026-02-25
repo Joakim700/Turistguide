@@ -25,14 +25,12 @@
 	<br>
 		<!--Tags-->
 	<label>Tags:</label>
-	<div th:each="tag : ${allTags}">
+	<div th:each="tag : ${allTags}" class="tag-item">
 		<label>
 			<input type="checkbox"
-			       th:value="${tag}"
-			       th:field="${allTags}"
-			       th:id ="${'tag - ' + tag}"
-			       th:checked="${attraction.tags.contains(tag)}"
-			/>
+				   th:value="${tag}"
+				   th:field="*{tags}"
+				   th:id="${'tag-' + tag}" />
 			<span th:text="${tag}">Tag Name</span>
 		</label>
 	</div>
