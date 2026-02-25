@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -42,7 +44,7 @@ class TouristControllerTest {
 
         TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
 
-        Mockito.when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
+        when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
 
         mockMvc.perform(get("/touristguide/attractions/{name}", "Eiffel Tower"))
                 .andExpect(status().isOk())
@@ -56,7 +58,7 @@ class TouristControllerTest {
         List<TouristTags> mockTags = List.of(TouristTags.VERDENSKENDT);
         TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", mockTags);
 
-        Mockito.when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
+        when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
 
         mockMvc.perform(get("/touristguide/attractions/{name}/tags", "Eiffel Tower"))
                 .andExpect(status().isOk())
@@ -76,7 +78,7 @@ class TouristControllerTest {
 
         TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
 
-        Mockito.when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
+        when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
 
         mockMvc.perform(get("/touristguide/attractions/{name}/edit", "Eiffel Tower"))
                 .andExpect(status().isOk())
@@ -84,6 +86,26 @@ class TouristControllerTest {
                 .andExpect(model().attribute("attraction", mockAttraction));
 
 
+    }
+
+    @Test
+    void shouldRedirectDelete() throws Exception{
+        TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
+
+        mockMvc.perform(post("/touristguide/attractions/delete/{name}", "Eiffel Tower"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/touristguide/attractions"));
+        verify(touristService).deleteAttraction("Eiffel Tower");
+    }
+
+    @Test
+    void shouldDelete() throws Exception{
+        TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
+
+        touristService.createAttraction(mockAttraction);
+        touristService.deleteAttraction("Eiffel Tower");
+
+        assertNull(touristService.getAttractionByName("Eiffel Tower"));
     }
 
 //    @Test
