@@ -10,9 +10,11 @@
 
 <header class="bg-gray-200 shadow-md">
 	<nav class="flex max-w-7xl mx-auto px-8 py-6 items-center justify-between" aria-label="Main Navigation">
-		<h1 class="text-4xl font-light tracking-wide text-black">
-			TOURIST GUIDE
-		</h1>
+		<a th:href="@{/touristguide/homepage}" class="text-4xl font-light tracking-wide text-black">
+			<h1>
+				TOURIST GUIDE
+			</h1>
+		</a>
 
 		<ul class="flex space-x-8 text-lg text-red-700">
 			<li><a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">Home</a></li>
