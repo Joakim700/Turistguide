@@ -2,9 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/output.css}">
     <title>Add a new attraction:</title>
 </head>
-<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
 <form action="#" th:action="@{/touristguide/attractions/save}" th:object="${attraction}" method="post">
     <label>Name</label>
     <input type="text" th:field="*{name}">
@@ -28,6 +30,4 @@
     <button type="submit">Register</button>
 </form>
 
-
-</body>
 </html>

@@ -1,39 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link th:href="@{/css/output.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/output.css}">
     <meta charset="UTF-8">
     <title th:text="${attraction.getName()}">Attraction Name</title>
 </head>
 
-<body class="min-h-screen flex flex-col bg-gray-50">
-<header class="bg-gray-200 shadow-md sticky top-0 z-50">
-    <nav class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between" aria-label="Main Navigation">
-
-        <h1 class="text-4xl font-light tracking-wide text-black">
-            TOURIST GUIDE
-        </h1>
-
-        <ul class="flex space-x-8 text-lg text-red-700">
-            <li>
-                <a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">
-                    Home
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/touristguide/attractions}"  class="hover:text-black transition duration-200">
-                    Show Attractions
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">
-                    About Us
-                </a>
-            </li>
-        </ul>
-
-    </nav>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <main class="flex-grow flex items-center justify-center p-6">
     <div class="w-full max-w-4xl bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
@@ -64,7 +37,7 @@
         <div class="p-6 bg-white flex flex-wrap items-center justify-between gap-8">
 
             <div class="flex gap-8"> <a th:href="@{/touristguide/attractions/{name}/edit(name=${attraction.name})}"
-                                        class="flex items-center justify-center px-6 py-3 bg-gray-900 text-black rounded-xl font-bold hover:bg-gray-800 transition-all active:scale-95 shadow-md">
+                                        class="flex items-center justify-center px-6 py-3 bg-white text-gray-700 border-2 border-gray-100 rounded-xl font-bold hover:border-red-200 hover:text-red-600 transition-all active:scale-95">
                 Update Details
             </a>
 
@@ -86,5 +59,7 @@
         </div>
     </div>
 </main>
-</body>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 </html>

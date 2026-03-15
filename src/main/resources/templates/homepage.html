@@ -2,39 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href="../css/output.css" rel="stylesheet">
-
+    <link rel="stylesheet" th:href="@{/css/output.css}">
     <title>Tourist Guide</title>
 </head>
-<body class="bg-white">
 
-<header class="bg-gray-200 shadow-md">
-    <nav class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between" aria-label="Main Navigation">
-
-        <h1 class="text-4xl font-light tracking-wide text-black">
-            TOURIST GUIDE
-        </h1>
-
-        <ul class="flex space-x-8 text-lg text-red-700">
-            <li>
-                <a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">
-                    Home
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/touristguide/attractions}"  class="hover:text-black transition duration-200">
-                    Attractions
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">
-                    About Us
-                </a>
-            </li>
-        </ul>
-
-    </nav>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <main class="max-w-7xl mx-auto px-8 py-12">
 
@@ -42,8 +14,8 @@
 
         <div class="relative h-[400px] bg-gray-100 overflow-hidden rounded-sm">
             <img
-                    th:src="@{/css/images/earth.jpg}"
-                    src="../static/css/images/earth.jpg"
+                    th:src="@{/images/earth.jpg}"
+                    src="../static/images/earth.jpg"
                     alt="Travel Destination"
                     class="w-full h-full object-cover grayscale hover:grayscale-0 transition duration-700"
             />
@@ -81,42 +53,7 @@
         </div>
     </div>
 
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
 </main>
-
-<footer class="border-t border-gray-100 bg-white mt-12">
-    <div class="max-w-7xl mx-auto px-8 py-12">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
-
-            <div>
-                <h2 class="text-2xl font-light tracking-wide text-black">
-                    TOURIST GUIDE
-                </h2>
-                <p class="text-gray-500 mt-2 max-w-xs">
-                    Curating the best experiences for the modern traveler.
-                </p>
-            </div>
-
-            <ul class="flex flex-wrap gap-x-8 gap-y-4 text-red-700">
-                <li>
-                    <a th:href="@{/touristguide/attractions}" class="hover:text-black transition duration-200">Attractions</a>
-                </li>
-                <li>
-                    <a href="#" class="hover:text-black transition duration-200">Privacy Policy</a>
-                </li>
-                <li>
-                    <a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">Contact</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="mt-12 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between text-sm text-gray-400">
-            <p>&copy; 2026 Tourist Guide. All rights reserved.</p>
-            <div class="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" class="hover:text-black transition">Instagram</a>
-                <a href="#" class="hover:text-black transition">Twitter</a>
-            </div>
-        </div>
-    </div>
-</footer>
-</body>
 </html>

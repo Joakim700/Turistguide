@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <title>layout</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container mx-auto py-8">
+    <th:block th:insert="${content}"></th:block>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
