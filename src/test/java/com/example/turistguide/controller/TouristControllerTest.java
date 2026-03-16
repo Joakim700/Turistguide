@@ -2,7 +2,7 @@ package com.example.turistguide.controller;
 
 
 import com.example.turistguide.model.TouristAttraction;
-import com.example.turistguide.repository.TouristTags;
+import com.example.turistguide.model.TouristTags;
 import com.example.turistguide.service.TouristService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
