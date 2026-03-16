@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+
+<header th:fragment="header" class="bg-gray-200 shadow-md">
+    <nav class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between" aria-label="Main Navigation">
+
+        <h1 class="text-4xl font-light tracking-wide text-black">
+            TOURIST GUIDE
+        </h1>
+
+        <ul class="flex space-x-8 text-lg text-red-700">
+            <li>
+                <a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">
+                    Home
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/touristguide/attractions}"  class="hover:text-black transition duration-200">
+                    Attractions
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">
+                    About Us
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+</body>
+</html>

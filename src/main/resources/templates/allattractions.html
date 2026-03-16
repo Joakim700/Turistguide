@@ -2,41 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href="../css/output.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/output.css}">
     <title>Tourist Attractions</title>
 </head>
 
-<body class="bg-white">
-
-<header class="bg-gray-200 shadow-md">
-    <nav class="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between" aria-label="Main Navigation">
-
-        <a th:href="@{/touristguide/homepage}" class="text-4xl font-light tracking-wide text-black">
-            <h1>
-                TOURIST GUIDE
-            </h1>
-        </a>
-
-        <ul class="flex space-x-8 text-lg text-red-700">
-            <li>
-                <a th:href="@{/touristguide/homepage}" class="hover:text-black transition duration-200">
-                    Home
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/touristguide/attractions}" class="hover:text-black transition duration-200">
-                    Attractions
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/touristguide/about-us}" class="hover:text-black transition duration-200">
-                    About Us
-                </a>
-            </li>
-        </ul>
-
-    </nav>
-</header>
+<div th:replace="~{fragments/header :: header}"></div>
 
 <main class="max-w-7xl mx-auto px-8 py-20 mt-12 bg-gray-50/50">
 
@@ -91,5 +61,7 @@
 
     </div>
 </main>
-</body>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 </html>
