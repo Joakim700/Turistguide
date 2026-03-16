@@ -1,6 +1,7 @@
 package com.example.turistguide.repository;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +10,11 @@ import java.util.List;
 public class TouristRepository {
     private final List<TouristAttraction> attractions = new ArrayList<>();
 
-    public TouristRepository() {
+    private JdbcTemplate jdbcTemplate;
+
+    public TouristRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+
         populateAttractions();
     }
 
