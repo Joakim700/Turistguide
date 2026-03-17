@@ -2,6 +2,7 @@ package com.example.turistguide.repository.jdbc;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
 import com.example.turistguide.repository.mapper.AttractionMapper;
+import com.example.turistguide.repository.mapper.CityMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -10,29 +11,17 @@ import java.util.List;
 
 @Repository
 public class TouristRepository {
-    private final List<TouristAttraction> attractions = new ArrayList<>();
 
-    private JdbcTemplate jdbcTemplate;
-    private AttractionMapper rowMapper = new AttractionMapper();
+    private JdbcTemplate jdbc;
+    private AttractionMapper attractionMapper = new AttractionMapper();
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-
-        populateAttractions();
+        this.jdbc = jdbc;
     }
 
-    private void populateAttractions() { // DATABASE {Name, Description}
-
-        attractions.add(new TouristAttraction("Eiffel Tower", "An impressive tower in the heart of Paris, with a great view. Close to many other attractions.", "Paris", List.of(TouristTags.VERDENSKENDT, TouristTags.BØRNEVENLIG, TouristTags.SIGHTSEEING)));
-        attractions.add(new TouristAttraction("Great Wall of China", "An impressive wall spanning the northern parts of China. Spend hours walking the long paths, and taking in the impressive sights.", "Beijing", List.of(TouristTags.BØRNEVENLIG, TouristTags.GRATIS, TouristTags.MINDESMÆRKE, TouristTags.SIGHTSEEING, TouristTags.VERDENSKENDT)));
-        attractions.add(new TouristAttraction("The Little Mermaid", "A small statue of a mermaid, calling back to the great danish writer H.C.Andersen. Its since, almost, become a symbol of the city of Copenhagen itself.", "Copenhagen", List.of(TouristTags.BØRNEVENLIG, TouristTags.GRATIS, TouristTags.SIGHTSEEING)));
-        attractions.add(new TouristAttraction("Grand Canyon", "A historical site, of great value to both archeologists, geologists and tourists who flock to it for the great view.", "Arizona", List.of(TouristTags.GRATIS, TouristTags.SIGHTSEEING, TouristTags.BØRNEVENLIG, TouristTags.VERDENSKENDT, TouristTags.NATUR, TouristTags.OPLEVELSE)));
-        attractions.add(new TouristAttraction("Tower Of London", "An old fort, having had funtioned as a tollhouse, a prison and a seat of governance. An important building to the city of London.", "London", List.of(TouristTags.DYR, TouristTags.MUSEUM, TouristTags.MINDESMÆRKE)));
-        attractions.add(new TouristAttraction("The Louvre", "A world famous museum and art gallery housing some of the most famous artworks in the world.", "Paris", (List.of(TouristTags.DYR, TouristTags.MUSEUM, TouristTags.KUNST, TouristTags.VERDENSKENDT))));
-    }
-
-    public List<TouristAttraction> getAllAttractions() { // Vis alle attractions
-        return new ArrayList<>(attractions);
+    public List<TouristAttraction> findAllAttractions() {
+        String sql = "SELECT id, name, description, city, tags FROM attractions ORDER BY id";
+        return jdbc.query(sql, attractionMapper);
     }
 
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
