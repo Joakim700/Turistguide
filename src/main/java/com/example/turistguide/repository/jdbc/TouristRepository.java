@@ -1,8 +1,9 @@
-package com.example.turistguide.repository;
+package com.example.turistguide.repository.jdbc;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
