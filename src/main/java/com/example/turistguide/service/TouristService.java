@@ -1,7 +1,7 @@
 package com.example.turistguide.service;
 
 import com.example.turistguide.model.TouristAttraction;
-import com.example.turistguide.repository.TouristRepository;
+import com.example.turistguide.repository.jdbc.TouristRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

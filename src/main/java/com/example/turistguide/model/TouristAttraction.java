@@ -5,12 +5,14 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class TouristAttraction {
+    Long attractionId;
     String name;
     String description;
     String city;
     Collection<TouristTags> tags = new ArrayList<>();
 
-    public TouristAttraction(String name, String description, String city, Collection<TouristTags> tags) {
+    public TouristAttraction(Long attractionId, String name, String description, String city, Collection<TouristTags> tags) {
+        this.attractionId = attractionId;
         this.name = name;
         this.description = description;
         this.city = city;
