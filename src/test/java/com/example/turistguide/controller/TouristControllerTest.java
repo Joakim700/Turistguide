@@ -11,7 +11,10 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -38,7 +41,7 @@ class TouristControllerTest {
     @Test
     void shouldShowAttractionByName() throws Exception {
 
-        TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
+        TouristAttraction mockAttraction = new TouristAttraction(1L, "Eiffel Tower", "Tower", "Paris", new HashSet<>(Arrays.asList(TouristTags.VERDENSKENDT, TouristTags.OPLEVELSE)) );
 
         when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
 
@@ -51,15 +54,15 @@ class TouristControllerTest {
     @Test
     void shouldShowAttractionTags() throws Exception {
 
-        List<TouristTags> mockTags = List.of(TouristTags.VERDENSKENDT);
-        TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", mockTags);
+        Set falseTags = new HashSet<>(Arrays.asList(TouristTags.BØRNEVENLIG, TouristTags.GRATIS, TouristTags.OPLEVELSE));
+        TouristAttraction mockAttraction = new TouristAttraction(1L,"Eiffel Tower", "Tower", "Paris", falseTags);
 
         when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
 
         mockMvc.perform(get("/touristguide/attractions/{name}/tags", "Eiffel Tower"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("tags"))
-                .andExpect(model().attribute("tags", mockTags));
+                .andExpect(model().attribute("tags", falseTags));
     }
 
     @Test
@@ -110,7 +113,8 @@ class TouristControllerTest {
     @Test
     void shouldShowEditByNamePage() throws Exception {
 
-        TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
+        Set falseTags = new HashSet<>(Arrays.asList(TouristTags.BØRNEVENLIG, TouristTags.GRATIS, TouristTags.OPLEVELSE));
+        TouristAttraction mockAttraction = new TouristAttraction(1L,"Eiffel Tower", "Tower", "Paris", falseTags);
 
         when(touristService.getAttractionByName("Eiffel Tower")).thenReturn(mockAttraction);
 
@@ -130,7 +134,8 @@ class TouristControllerTest {
 
     @Test
     void shouldDelete() {
-        TouristAttraction mockAttraction = new TouristAttraction("Eiffel Tower", "Tower", "Paris", List.of(TouristTags.VERDENSKENDT));
+        Set falseTags = new HashSet<>(Arrays.asList(TouristTags.BØRNEVENLIG, TouristTags.GRATIS, TouristTags.OPLEVELSE));
+        TouristAttraction mockAttraction = new TouristAttraction(1L,"Eiffel Tower", "Tower", "Paris", falseTags);
 
         touristService.createAttraction(mockAttraction);
         touristService.deleteAttraction("Eiffel Tower");
