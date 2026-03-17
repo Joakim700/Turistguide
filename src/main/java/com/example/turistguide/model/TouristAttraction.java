@@ -1,17 +1,15 @@
 package com.example.turistguide.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
+import java.util.*;
 
 public class TouristAttraction {
     Long attractionId;
     String name;
     String description;
     String city;
-    Collection<TouristTags> tags = new ArrayList<>();
+    Set<TouristTags> tags = new HashSet<>();
 
-    public TouristAttraction(Long attractionId, String name, String description, String city, Collection<TouristTags> tags) {
+    public TouristAttraction(Long attractionId, String name, String description, String city, Set<TouristTags> tags) {
         this.attractionId = attractionId;
         this.name = name;
         this.description = description;
@@ -34,6 +32,10 @@ public class TouristAttraction {
         this.name = name;
     }
 
+    public void setAttractionId(Long Id){
+        this.attractionId = Id;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -46,11 +48,11 @@ public class TouristAttraction {
         this.city = city;
     }
 
-    public Collection<TouristTags> getTags() {
+    public Set<TouristTags> getTags() {
         return tags;
     }
 
-    public void setTags(Collection<TouristTags> tags) {
+    public void setTags(Set<TouristTags> tags) {
         this.tags = tags;
     }
 
