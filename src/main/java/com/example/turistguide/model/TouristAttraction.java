@@ -20,6 +20,7 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
+
     public TouristAttraction() {
     }
 
