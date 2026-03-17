@@ -9,10 +9,10 @@ public class TouristAttraction {
     Long attractionId;
     String name;
     String description;
-    String city;
+    City city;
     Collection<TouristTags> tags = new ArrayList<>();
 
-    public TouristAttraction(Long attractionId, String name, String description, String city, Collection<TouristTags> tags) {
+    public TouristAttraction(Long attractionId, String name, String description, City city, Collection<TouristTags> tags) {
         this.attractionId = attractionId;
         this.name = name;
         this.description = description;
@@ -40,11 +40,11 @@ public class TouristAttraction {
         this.description = description;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 

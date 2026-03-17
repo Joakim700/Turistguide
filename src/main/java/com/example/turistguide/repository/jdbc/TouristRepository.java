@@ -2,6 +2,7 @@ package com.example.turistguide.repository.jdbc;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
 import com.example.turistguide.repository.mapper.AttractionMapper;
+import com.example.turistguide.repository.mapper.CityMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,25 +12,16 @@ import java.util.List;
 @Repository
 public class TouristRepository {
 
-
-    private final List<TouristAttraction> attractions = new ArrayList<>();
-
-    private JdbcTemplate jdbcTemplate;
-    private AttractionMapper rowMapper = new AttractionMapper();
+    private JdbcTemplate jdbc;
+    private AttractionMapper attractionMapper = new AttractionMapper();
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-
+        this.jdbc = jdbc;
     }
 
-    private List<TouristAttraction> findAllAttractions() { // DATABASE {Name, Description}
-        String sqlAttractionPull = "SELECT name, description, attraction_id FROM attractions";
-        String sqlAttractionTagsPull = "SELECT tags.tag_name AS tags, FROM attractions JOIN attraction_tags on attraction_id = attraction_tags.attraction_id JOIN tags on ";
-
-    }
-
-    public List<TouristAttraction> getAllAttractions() { // Vis alle attractions
-        return new ArrayList<>(attractions);
+    public List<TouristAttraction> findAllAttractions() {
+        String sql = "SELECT id, name, description, city, tags FROM attractions ORDER BY id";
+        return jdbc.query(sql, attractionMapper);
     }
 
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
