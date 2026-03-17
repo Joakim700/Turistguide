@@ -17,7 +17,7 @@ public class AttractionMapper implements RowMapper<TouristAttraction> {
                 rs.getString("name"),
                 rs.getString("description"),
                 rs.getString("city"),
-                rs.getString("tags");
+                rs.getString("tags")
         );
     }
 }
