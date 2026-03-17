@@ -1,15 +1,11 @@
-
-
 INSERT INTO cities (city_name) VALUES
-('Paris'), ('Beijing', ('Copenhagen'), ('Arizona'), ('London'))
-ON CONFLICT (city_name) DO NOTHING;
+('Paris'), ('Beijing'), ('Copenhagen'), ('Arizona'), ('London');
 
 
 INSERT INTO tags (tag_name) VALUES
 ('BØRNEVENLIG'), ('GRATIS'), ('MUSEUM'), ('DYR'),
 ('KUNST'), ('NATUR'), ('SIGHTSEEING'), ('OPLEVELSE'),
-('MINDESMÆRKE'), ('VERDENSKENDT')
-ON CONFLICT (tag_name) DO NOTHING;
+('MINDESMÆRKE'), ('VERDENSKENDT');
 
 INSERT INTO attractions (name, description, city_id)
 VALUES
@@ -29,6 +25,21 @@ VALUES
      (SELECT city_id FROM cities WHERE city_name = 'London')),
 
     ('The Louvre', 'A world famous museum and art gallery housing some of the most famous artworks in the world.',
-     (SELECT city_id FROM cities WHERE city_name = 'Paris'))
-
-
+     (SELECT city_id FROM cities WHERE city_name = 'Paris'));
+     
+	INSERT INTO attraction_tags (attraction_id, tag_id)
+	VALUES 
+	  (1, 1),
+	  (1, 7),
+	  (1, 8),
+	  (2, 2),
+	  (2, 6),
+	  (3, 3),
+	  (3, 9),
+	  (4, 6),
+	  (4, 8),
+	  (5, 5),
+	  (5, 7),
+	  (6, 1),
+	  (6, 3),
+	  (6, 5);
