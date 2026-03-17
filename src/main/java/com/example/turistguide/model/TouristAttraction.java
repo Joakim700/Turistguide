@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 public class TouristAttraction {
+
     Long attractionId;
     String name;
     String description;

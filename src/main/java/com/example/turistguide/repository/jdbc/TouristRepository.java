@@ -1,6 +1,7 @@
 package com.example.turistguide.repository.jdbc;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
+import com.example.turistguide.repository.mapper.AttractionMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ public class TouristRepository {
     private final List<TouristAttraction> attractions = new ArrayList<>();
 
     private JdbcTemplate jdbcTemplate;
+    private AttractionMapper rowMapper = new AttractionMapper();
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
