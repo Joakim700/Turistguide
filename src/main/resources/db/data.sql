@@ -39,7 +39,7 @@ VALUES
 -- INDSÆTTER ATTRACTION_TAGS TIL DATABASE
 INSERT INTO attraction_tags (attraction_id, tag_id)
 
-SELECT (SELECT attraction_id FROM attractions WHERE name = 'Paris'),
+SELECT (SELECT attraction_id FROM attractions WHERE name = 'Eiffel Tower'),
         tag_id FROM tags WHERE tag_name IN ('VERDENSKENDT', 'BØRNEVENLIG', 'SIGHTSEEING')
 UNION ALL
 SELECT (SELECT attraction_id FROM attractions WHERE name = 'Great Wall of China'),
