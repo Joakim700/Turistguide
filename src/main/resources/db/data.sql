@@ -1,4 +1,3 @@
-
 --INDSÆTTER CITIES TIL DATABASE
 INSERT IGNORE INTO cities (city_name) VALUES
 ('Paris'),
@@ -55,4 +54,4 @@ SELECT (SELECT attraction_id FROM attractions WHERE name = 'Tower Of London'),
         tag_id FROM tags WHERE tag_name IN ('DYR', 'MUSEUM', 'MINDESMÆRKE')
 UNION ALL
 SELECT (SELECT attraction_id FROM attractions WHERE name = 'The Louvre'),
-        tag_id FROM tags WHERE tag_name IN ('DYR', 'MUSEUM', 'KUNST', 'VERDENSKENDT')
+        tag_id FROM tags WHERE tag_name IN ('DYR', 'MUSEUM', 'KUNST', 'VERDENSKENDT')r
