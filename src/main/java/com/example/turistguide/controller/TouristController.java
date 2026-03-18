@@ -36,51 +36,51 @@ public class TouristController {
         return "allattractions";
     }
 
-    @GetMapping("/attractions/{name}")
-    public String getAttractionsByName(@PathVariable String name, Model model) {
-        TouristAttraction attraction = service.getAttractionByName(name);
-        model.addAttribute("attraction", attraction);
-        return "attraction";
-    }
-
-    @GetMapping("/attractions/{name}/tags")
-    public String getAttractionTags(@PathVariable String name, Model model) {
-        TouristAttraction attraction = service.getAttractionByName(name);
-        model.addAttribute("tags", attraction.getTags());
-        return "tags";
-    }
-
-    @GetMapping("/attractions/add")
-    public String addAttraction(Model model) {
-        TouristAttraction attraction = new TouristAttraction();
-        model.addAttribute("attraction", attraction);
-        model.addAttribute("tags", TouristTags.values());
-        return "addnewattraction";
-    }
-
-    @GetMapping("/attractions/{name}/edit")
-    public String editAttraction(@PathVariable String name, Model model) {
-        TouristAttraction attraction = service.getAttractionByName(name);
-        model.addAttribute("attraction", attraction);
-        model.addAttribute("allTags", TouristTags.values());
-        return "update-attraction";
-    }
-
-    @PostMapping("/attractions/save")
-    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
-        service.createAttraction(touristAttraction);
-        return "redirect:/touristguide/attractions";
-    }
-
-    @PostMapping("/attractions/update")
-    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
-        service.updateAttraction(attraction);
-        return "redirect:/touristguide/attractions";
-    }
-
-    @PostMapping("/attractions/delete/{name}")
-    public String deleteAttraction(@PathVariable String name) {
-        service.deleteAttraction(name);
-        return "redirect:/touristguide/attractions";
-    }
+//    @GetMapping("/attractions/{name}")
+//    public String getAttractionsByName(@PathVariable String name, Model model) {
+//        TouristAttraction attraction = service.getAttractionByName(name);
+//        model.addAttribute("attraction", attraction);
+//        return "attraction";
+//    }
+//
+//    @GetMapping("/attractions/{name}/tags")
+//    public String getAttractionTags(@PathVariable String name, Model model) {
+//        TouristAttraction attraction = service.getAttractionByName(name);
+//        model.addAttribute("tags", attraction.getTags());
+//        return "tags";
+//    }
+//
+//    @GetMapping("/attractions/add")
+//    public String addAttraction(Model model) {
+//        TouristAttraction attraction = new TouristAttraction();
+//        model.addAttribute("attraction", attraction);
+//        model.addAttribute("tags", TouristTags.values());
+//        return "addnewattraction";
+//    }
+//
+//    @GetMapping("/attractions/{name}/edit")
+//    public String editAttraction(@PathVariable String name, Model model) {
+//        TouristAttraction attraction = service.getAttractionByName(name);
+//        model.addAttribute("attraction", attraction);
+//        model.addAttribute("allTags", TouristTags.values());
+//        return "update-attraction";
+//    }
+//
+//    @PostMapping("/attractions/save")
+//    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+//        service.createAttraction(touristAttraction);
+//        return "redirect:/touristguide/attractions";
+//    }
+//
+//    @PostMapping("/attractions/update")
+//    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
+//        service.updateAttraction(attraction);
+//        return "redirect:/touristguide/attractions";
+//    }
+//
+//    @PostMapping("/attractions/delete/{name}")
+//    public String deleteAttraction(@PathVariable String name) {
+//        service.deleteAttraction(name);
+//        return "redirect:/touristguide/attractions";
+//    }
 }

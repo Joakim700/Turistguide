@@ -7,21 +7,16 @@ public class TouristAttraction {
     Long attractionId;
     String name;
     String description;
-    String city;
-    Set<TouristTags> tags = new HashSet<>();
-
-    public TouristAttraction(Long attractionId, String name, String description, String city, Set<TouristTags> tags) {
     City city;
-    Collection<TouristTags> tags = new ArrayList<>();
+    Set<TouristTags> tags;
 
-    public TouristAttraction(Long attractionId, String name, String description, City city, Collection<TouristTags> tags) {
+    public TouristAttraction(Long attractionId, String name, String description, City city, Set<TouristTags> tags) {
         this.attractionId = attractionId;
         this.name = name;
         this.description = description;
         this.city = city;
         this.tags = tags;
     }
-
 
     public TouristAttraction() {
     }

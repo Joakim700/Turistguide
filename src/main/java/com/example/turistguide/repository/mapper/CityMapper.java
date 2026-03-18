@@ -10,8 +10,8 @@ public class CityMapper implements RowMapper<City> {
     public City mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         return new City(
-              rs.getLong("cityId"),
-              rs.getString("city")
+              rs.getLong("city_id"),
+              rs.getString("city_name")
         );
     }
 }
