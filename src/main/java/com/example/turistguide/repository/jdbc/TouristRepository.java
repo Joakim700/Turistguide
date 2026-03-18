@@ -20,7 +20,7 @@ public class TouristRepository {
                 "FROM attractions a " +
                 "JOIN cities c on c.city_id = a.city_id " +
                 "JOIN attraction_tags at ON a.attraction_id = at.attraction_id " +
-                "JOIN tags t ON at.attraction_id = t.tag_id";
+                "JOIN tags t ON at.tag_id = t.tag_id";
 
         return jdbcTemplate.query(sql, rs -> {
             Map<Long, TouristAttraction> map = new HashMap<>();
