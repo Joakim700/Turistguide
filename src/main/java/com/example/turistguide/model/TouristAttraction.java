@@ -3,6 +3,7 @@ package com.example.turistguide.model;
 import java.util.*;
 
 public class TouristAttraction {
+
     Long attractionId;
     String name;
     String description;
@@ -10,12 +11,17 @@ public class TouristAttraction {
     Set<TouristTags> tags = new HashSet<>();
 
     public TouristAttraction(Long attractionId, String name, String description, String city, Set<TouristTags> tags) {
+    City city;
+    Collection<TouristTags> tags = new ArrayList<>();
+
+    public TouristAttraction(Long attractionId, String name, String description, City city, Collection<TouristTags> tags) {
         this.attractionId = attractionId;
         this.name = name;
         this.description = description;
         this.city = city;
         this.tags = tags;
     }
+
 
     public TouristAttraction() {
     }
@@ -40,11 +46,11 @@ public class TouristAttraction {
         this.description = description;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 

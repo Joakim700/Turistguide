@@ -1,6 +1,8 @@
 package com.example.turistguide.repository.jdbc;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
+import com.example.turistguide.repository.mapper.AttractionMapper;
+import com.example.turistguide.repository.mapper.CityMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -8,44 +10,17 @@ import java.util.*;
 
 @Repository
 public class TouristRepository {
-    private final List<TouristAttraction> attractions = new ArrayList<>();
-    private final JdbcTemplate jdbcTemplate;
+
+    private JdbcTemplate jdbc;
+    private AttractionMapper attractionMapper = new AttractionMapper();
 
     public TouristRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbc = jdbc;
     }
 
-    public List<TouristAttraction> getAllAttractions() { // Vis alle attractions
-        String sql = "SELECT a.attraction_id, a.name, a.description, c.city_name AS city, t.tag_name AS tags " +
-                "FROM attractions a " +
-                "JOIN cities c on c.city_id = a.city_id " +
-                "JOIN attraction_tags at ON a.attraction_id = at.attraction_id " +
-                "JOIN tags t ON at.tag_id = t.tag_id";
-
-        return jdbcTemplate.query(sql, rs -> {
-            Map<Long, TouristAttraction> map = new HashMap<>();
-
-            while(rs.next()){
-                Long id = rs.getLong("attraction_id");
-                String tags = rs.getString("tags");
-                TouristTags tagEnum = TouristTags.valueOf(tags);
-
-                TouristAttraction attraction = map.get(id);
-                if (attraction == null){
-                    attraction =
-                            new TouristAttraction(rs.getLong("attraction_id"),
-                                        rs.getString("name"),
-                                        rs.getString("description"),
-                                        rs.getString("city"),
-                                        new HashSet<>());
-                }
-                map.put(id, attraction);
-
-                attraction.getTags().add(tagEnum);
-            }
-
-            return new ArrayList<>(map.values());
-        });
+    public List<TouristAttraction> findAllAttractions() {
+        String sql = "SELECT id, name, description, city, tags FROM attractions ORDER BY id";
+        return jdbc.query(sql, attractionMapper);
     }
 
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()

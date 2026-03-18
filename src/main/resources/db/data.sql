@@ -1,16 +1,23 @@
-INSERT INTO cities (city_name) VALUES
-('Paris'), ('Beijing'), ('Copenhagen'), ('Arizona'), ('London');
+--INDSÆTTER CITIES TIL DATABASE
+INSERT IGNORE INTO cities (city_name) VALUES
+('Paris'),
+('Beijing'),
+('Copenhagen'),
+('Arizona'),
+('London');
 
-
-INSERT INTO tags (tag_name) VALUES
+-- INDSÆTTER TAGS TIL DATABASE
+INSERT IGNORE INTO tags (tag_name) VALUES
 ('BØRNEVENLIG'), ('GRATIS'), ('MUSEUM'), ('DYR'),
 ('KUNST'), ('NATUR'), ('SIGHTSEEING'), ('OPLEVELSE'),
 ('MINDESMÆRKE'), ('VERDENSKENDT');
 
+-- INDSÆTTER ATTRACTIONS TIL DATABASE
 INSERT INTO attractions (name, description, city_id)
 VALUES
+
     ('Eiffel Tower', 'An impressive tower in the heart of Paris, with a great view. Close to many other attractions.',
-    (SELECT city_id FROM cities WHERE city_name = 'Paris')),
+     (SELECT city_id FROM cities WHERE city_name = 'Paris')),
 
     ('Great Wall of China', 'An impressive wall spanning the northern parts of China. Spend hours walking the long paths, and taking in the impressive sights.',
      (SELECT city_id FROM cities WHERE city_name = 'Beijing')),
@@ -26,20 +33,25 @@ VALUES
 
     ('The Louvre', 'A world famous museum and art gallery housing some of the most famous artworks in the world.',
      (SELECT city_id FROM cities WHERE city_name = 'Paris'));
-     
-	INSERT INTO attraction_tags (attraction_id, tag_id)
-	VALUES 
-	  (1, 1),
-	  (1, 7),
-	  (1, 8),
-	  (2, 2),
-	  (2, 6),
-	  (3, 3),
-	  (3, 9),
-	  (4, 6),
-	  (4, 8),
-	  (5, 5),
-	  (5, 7),
-	  (6, 1),
-	  (6, 3),
-	  (6, 5);
+
+
+-- INDSÆTTER ATTRACTION_TAGS TIL DATABASE
+INSERT INTO attraction_tags (attraction_id, tag_id)
+
+SELECT (SELECT attraction_id FROM attractions WHERE name = 'Eiffel Tower'),
+        tag_id FROM tags WHERE tag_name IN ('VERDENSKENDT', 'BØRNEVENLIG', 'SIGHTSEEING')
+UNION ALL
+SELECT (SELECT attraction_id FROM attractions WHERE name = 'Great Wall of China'),
+        tag_id FROM tags WHERE tag_name IN ('BØRNEVENLIG', 'GRATIS', 'MINDESMÆRKE', 'SIGHTSEEING', 'VERDENSKENDT')
+UNION ALL
+SELECT (SELECT attraction_id FROM attractions WHERE name = 'The Little Mermaid'),
+        tag_id FROM tags WHERE tag_name IN ('BØRNEVENLIG', 'GRATIS', 'SIGHTSEEING')
+UNION ALL
+SELECT (SELECT attraction_id FROM attractions WHERE name = 'Grand Canyon'),
+        tag_id FROM tags WHERE tag_name IN ('GRATIS', 'SIGHTSEEING', 'BØRNEVENLIG', 'VERDENSKENDT', 'NATUR', 'OPLEVELSE')
+UNION ALL
+SELECT (SELECT attraction_id FROM attractions WHERE name = 'Tower Of London'),
+        tag_id FROM tags WHERE tag_name IN ('DYR', 'MUSEUM', 'MINDESMÆRKE')
+UNION ALL
+SELECT (SELECT attraction_id FROM attractions WHERE name = 'The Louvre'),
+        tag_id FROM tags WHERE tag_name IN ('DYR', 'MUSEUM', 'KUNST', 'VERDENSKENDT')r

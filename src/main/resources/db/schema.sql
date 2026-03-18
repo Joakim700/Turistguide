@@ -3,29 +3,36 @@ CREATE DATABASE IF NOT EXISTS tourist_attraction
 
 USE tourist_attraction;
 
+DROP TABLE IF EXISTS attraction_tags;
+DROP TABLE IF EXISTS attractions;
+DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS cities;
-CREATE TABLE IF NOT EXISTS cities (
-    city_id SERIAL PRIMARY KEY,
+
+CREATE TABLE cities (
+    city_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     city_name VARCHAR(100) NOT NULL UNIQUE
 );
 
-DROP TABLE IF EXISTS attractions;
-CREATE TABLE IF NOT EXISTS attractions (
-    attraction_id SERIAL PRIMARY KEY,
+
+CREATE TABLE attractions (
+    attraction_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
-    city_id INT REFERENCES cities(city_id)
+    city_id BIGINT,
+    CONSTRAINT fk_city FOREIGN KEY (city_id) REFERENCES cities(city_id) ON DELETE CASCADE
 );
 
-DROP TABLE IF EXISTS tags;
-CREATE TABLE IF NOT EXISTS tags (
-    tag_id SERIAL PRIMARY KEY,
+
+CREATE TABLE tags (
+    tag_id BIGINT AUTO_INCREMENT PRIMARY KEY,
     tag_name VARCHAR(50) NOT NULL UNIQUE
 );
 
-DROP TABLE IF EXISTS attraction_tags;
-CREATE TABLE IF NOT EXISTS attraction_tags (
-    attraction_id INT REFERENCES attractions(attraction_id) ON DELETE CASCADE,
-    tag_id INT REFERENCES tags(tag_id) ON DELETE CASCADE,
-    PRIMARY KEY (attraction_id, tag_id)
+
+CREATE TABLE attraction_tags (
+    attraction_id BIGINT,
+    tag_id BIGINT,
+    PRIMARY KEY (attraction_id, tag_id),
+    CONSTRAINT fk_att_join FOREIGN KEY (attraction_id) REFERENCES attractions(attraction_id) ON DELETE CASCADE,
+    CONSTRAINT fk_tag_join FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE
 );
