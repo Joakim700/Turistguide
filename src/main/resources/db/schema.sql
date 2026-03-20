@@ -39,7 +39,7 @@ CREATE TABLE attraction_tags (
 );
 
 -- Joiner attraction_name / city_name / tag_name i en samlet tabel
--- !!!OBS!!! SKAL! være nederst efter alle vore INSERT's, ellers virker GROUP_CONCAT ikke !!!!
+-- !!!OBS!!! SKAL! være nederst efter alle INSERT's, ellers virker GROUP_CONCAT ikke !!!!
 CREATE TABLE attraction_JOINS_details AS
 SELECT
     a.attraction_name,
