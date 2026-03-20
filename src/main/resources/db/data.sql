@@ -1,10 +1,10 @@
--- INSERT CITIES
-MERGE INTO cities (city_name) KEY(city_name) VALUES
-    ('Paris'),
-    ('Beijing'),
-    ('Copenhagen'),
-    ('Arizona'),
-    ('London');
+-- INDSÆTTER CITIES TIL DATABASE
+INSERT IGNORE INTO cities (city_name) VALUES
+('Paris'),
+('Beijing'),
+('Copenhagen'),
+('Arizona'),
+('London');
 
 -- INSERT TAGS
 MERGE INTO tags (tag_name) KEY(tag_name) VALUES

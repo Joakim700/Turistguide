@@ -38,7 +38,8 @@ CREATE TABLE attraction_tags (
                                  CONSTRAINT fk_tag_join FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE
 );
 
--- Combined view of attraction, city, and tags (must be done after all inserts)
+-- Joiner attraction_name / city_name / tag_name i en samlet tabel
+-- !!!OBS!!! SKAL! være nederst efter alle INSERT's, ellers virker GROUP_CONCAT ikke !!!!
 CREATE TABLE attraction_JOINS_details AS
 SELECT
     a.attraction_name,
