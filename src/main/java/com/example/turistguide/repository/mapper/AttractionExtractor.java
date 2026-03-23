@@ -25,7 +25,7 @@ public class AttractionExtractor implements ResultSetExtractor<List<TouristAttra
             TouristAttraction attraction = touristAttractionHashMap.get(id);
 
             if (attraction == null) {
-                City city = cityMapper.mapRow(rs, rowNum);
+                City city = new City(0L, rs.getString("cities"));
 
                 attraction = new TouristAttraction(
                         id,
