@@ -78,9 +78,9 @@ public class TouristController {
 //        return "redirect:/touristguide/attractions";
 //    }
 //
-//    @PostMapping("/attractions/delete/{name}")
-//    public String deleteAttraction(@PathVariable String name) {
-//        service.deleteAttraction(name);
-//        return "redirect:/touristguide/attractions";
-//    }
+    @PostMapping("/attractions/delete/{name}")
+    public String deleteAttraction(@PathVariable String name) {
+        service.deleteAttraction(name);
+        return "redirect:/touristguide/attractions";
+    }
 }

@@ -1,5 +1,4 @@
 package com.example.turistguide.repository.jdbc;
-
 import com.example.turistguide.model.City;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
@@ -37,6 +36,8 @@ public class TouristRepository {
         String sql = "SELECT id, name, description, city, tags FROM attractions ORDER BY id";
         return jdbc.query(sql, extractor);
     }
+
+
 
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
 
@@ -97,8 +98,9 @@ public class TouristRepository {
 //        attractions.add(attraction);
 //    }
 //
-//    public void deleteAttraction(TouristAttraction attraction) {
-//        attractions.remove(attraction);
-//    }
+    public void deleteAttraction(String name) {
+        String sql = "DELETE FROM attractions WHERE name = ?";
+        jdbc.update(sql);
+    }
 }
 
