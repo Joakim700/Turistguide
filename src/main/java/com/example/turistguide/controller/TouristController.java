@@ -36,12 +36,12 @@ public class TouristController {
         return "allattractions";
     }
 
-//    @GetMapping("/attractions/{name}")
-//    public String getAttractionsByName(@PathVariable String name, Model model) {
-//        TouristAttraction attraction = service.getAttractionByName(name);
-//        model.addAttribute("attraction", attraction);
-//        return "attraction";
-//    }
+    @GetMapping("/attractions/{name}")
+    public String getAttractionsByName(@PathVariable String name, Model model) {
+        TouristAttraction attraction = service.getAttractionByName(name);
+        model.addAttribute("attraction", attraction);
+        return "attraction";
+    }
 //
 //    @GetMapping("/attractions/{name}/tags")
 //    public String getAttractionTags(@PathVariable String name, Model model) {
