@@ -29,7 +29,8 @@ public class TouristService {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
     }
-//
+
+    //
 //    public void createAttraction(TouristAttraction attraction) {
 //
 //        for (TouristAttraction a : repository.getAllAttractions()) {
@@ -49,13 +50,8 @@ public class TouristService {
 //        repository.updateAttraction(attraction);
 //    }
 //
-//    public void deleteAttraction(String name) {
-//
-//        TouristAttraction attraction = repository.getAttractionByName(name);
-//
-//        if (attraction != null) {
-//            repository.deleteAttraction(attraction);
-//        }
-//    }
-
+    public void deleteAttraction(String name) {
+        repository.deleteAttraction(name);
+    }
 }
+
