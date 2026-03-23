@@ -1,13 +1,13 @@
--- INDSÆTTER CITIES TIL DATABASE
-INSERT IGNORE INTO cities (city_name) VALUES
-('Paris'),
-('Beijing'),
-('Copenhagen'),
-('Arizona'),
-('London');
+-- INSERT CITIES (H2 version)
+MERGE INTO cities (city_name) KEY(city_name) VALUES
+    ('Paris'),
+    ('Beijing'),
+    ('Copenhagen'),
+    ('Arizona'),
+    ('London');
 
 -- INSERT TAGS
-INSERT INTO tags (tag_name) VALUES
+MERGE INTO tags (tag_name) KEY(tag_name) VALUES
     ('BØRNEVENLIG'), ('GRATIS'), ('MUSEUM'), ('DYR'),
     ('KUNST'), ('NATUR'), ('SIGHTSEEING'), ('OPLEVELSE'),
     ('MINDESMÆRKE'), ('VERDENSKENDT');
@@ -37,7 +37,7 @@ INSERT INTO attractions (attraction_name, attraction_description, city_id)
 SELECT 'The Louvre', 'A world famous museum and art gallery housing some of the most famous artworks in the world.', city_id
 FROM cities WHERE city_name = 'Paris';
 
--- INSERT ATTRACTION_TAGS
+-- INSERT ATTRACTION_TAGS (unchanged, H2 supports this)
 INSERT INTO attraction_tags (attraction_id, tag_id)
 SELECT a.attraction_id, t.tag_id
 FROM attractions a, tags t
