@@ -44,7 +44,7 @@ CREATE TABLE attraction_JOINS_details AS
 SELECT
     a.attraction_name,
     c.city_name,
-    GROUP_CONCAT(t.tag_name, ', ') AS all_tags
+    STRING_AGG(t.tag_name, ', ') AS all_tags
 FROM attractions a
          JOIN cities c ON a.city_id = c.city_id
          JOIN attraction_tags at ON a.attraction_id = at.attraction_id
