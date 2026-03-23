@@ -20,15 +20,15 @@ public class TouristService {
         return repository.getAllAttractions();
     }
 
-//    public TouristAttraction getAttractionByName(String name) {
-//
-//        TouristAttraction attraction = repository.getAttractionByName(name);
-//
-//        if (attraction != null && attraction.getName().equals(name)) {
-//            return attraction;
-//        }
-//        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
-//    }
+    public TouristAttraction getAttractionByName(String name) {
+
+        TouristAttraction attraction = repository.getAttractionByName(name);
+
+        if (attraction != null && attraction.getName().equals(name)) {
+            return attraction;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
+    }
 //
 //    public void createAttraction(TouristAttraction attraction) {
 //

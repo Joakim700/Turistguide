@@ -7,7 +7,7 @@ INSERT IGNORE INTO cities (city_name) VALUES
 ('London');
 
 -- INSERT TAGS
-MERGE INTO tags (tag_name) KEY(tag_name) VALUES
+INSERT INTO tags (tag_name) VALUES
     ('BØRNEVENLIG'), ('GRATIS'), ('MUSEUM'), ('DYR'),
     ('KUNST'), ('NATUR'), ('SIGHTSEEING'), ('OPLEVELSE'),
     ('MINDESMÆRKE'), ('VERDENSKENDT');
