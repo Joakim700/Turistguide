@@ -1,10 +1,8 @@
 package com.example.turistguide.repository.jdbc;
-
 import com.example.turistguide.model.City;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
 import com.example.turistguide.repository.mapper.AttractionExtractor;
-import jakarta.annotation.Nullable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
