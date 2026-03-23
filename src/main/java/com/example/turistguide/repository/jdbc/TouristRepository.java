@@ -24,6 +24,8 @@ public class TouristRepository {
         return jdbc.query(sql, extractor);
     }
 
+
+
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
         String sql = "SELECT a.attraction_id, a.name, a.description, c.id as city_id, c.city_name AS city, t.tags AS tags" +
                 "FROM attractions a" +
@@ -76,8 +78,9 @@ public class TouristRepository {
 //        attractions.add(attraction);
 //    }
 //
-//    public void deleteAttraction(TouristAttraction attraction) {
-//        attractions.remove(attraction);
-//    }
+    public void deleteAttraction(String name) {
+        String sql = "DELETE FROM attractions WHERE name = ?";
+        jdbc.update(sql);
+    }
 }
 
