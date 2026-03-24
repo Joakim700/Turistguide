@@ -30,17 +30,17 @@ public class TouristService {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attraction not found");
     }
 
-    //
-//    public void createAttraction(TouristAttraction attraction) {
-//
-//        for (TouristAttraction a : repository.getAllAttractions()) {
-//
-//            if (attraction.getName().equalsIgnoreCase(a.getName())) {
-//                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
-//            }
-//        }
-//        repository.saveAttraction(attraction);
-//    }
+
+    public void createAttraction(TouristAttraction attraction) {
+
+        for (TouristAttraction a : repository.getAllAttractions()) {
+
+            if (attraction.getName().equalsIgnoreCase(a.getName())) {
+                throw new ResponseStatusException(HttpStatus.CONFLICT, "Attraction already exists");
+            }
+        }
+        repository.addAttraction(attraction);
+    }
 //
 //    public void updateAttraction(TouristAttraction attraction) {
 //
