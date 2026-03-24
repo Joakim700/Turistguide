@@ -1,19 +1,16 @@
 //package com.example.turistguide.controller;
 //
-//
 //import com.example.turistguide.model.TouristAttraction;
 //import com.example.turistguide.model.TouristTags;
 //import com.example.turistguide.service.TouristService;
 //import org.junit.jupiter.api.Test;
 //import org.mockito.ArgumentCaptor;
 //import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 //import org.springframework.test.context.bean.override.mockito.MockitoBean;
 //import org.springframework.test.web.servlet.MockMvc;
 //
 //import java.util.Arrays;
 //import java.util.HashSet;
-//import java.util.List;
 //import java.util.Set;
 //
 //import static org.junit.jupiter.api.Assertions.*;
