@@ -57,6 +57,10 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
+    public void addTags(TouristTags tagToAdd) {
+        tags.add(tagToAdd);
+    }
+
 
     @Override
     public boolean equals(Object o) {
