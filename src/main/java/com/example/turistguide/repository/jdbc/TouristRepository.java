@@ -8,6 +8,7 @@ import com.example.turistguide.repository.mapper.CityMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Types;
 import java.util.*;
@@ -93,7 +94,7 @@ public class TouristRepository {
         Boolean isFound = false;
         while(!isFound) {
             for (City c : jdbc.query(cityQuery, mapper)) {
-                if (c.getName() == attraction.getCity().getName()) {
+                if (c.getName().equals(attraction.getCity().getName())) {
                     isFound = true;
                 }
             }
@@ -116,7 +117,7 @@ public class TouristRepository {
         Boolean isFound = false;
         while(!isFound) {
             for (City c : jdbc.query(cityQuery, mapper)) {
-                if (c.getName() == attraction.getCity().getName()) {
+                if (c.getName().equals(attraction.getCity().getName())) {
                     isFound = true;
                 }
             }
