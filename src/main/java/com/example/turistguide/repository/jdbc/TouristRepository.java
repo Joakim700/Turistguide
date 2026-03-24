@@ -48,18 +48,18 @@ public class TouristRepository {
                 new int[]{Types.VARCHAR},
                 AttractionExtractor -> {
                     TouristAttraction attraction = null;
-                    Set<TouristTags> tags = new HashSet<TouristTags>();
+                    Set<TouristTags> tags = new HashSet<>();
 
                     while (AttractionExtractor.next()) {
                         if (attraction == null) {
 
                             attraction = new TouristAttraction();
-                            attraction.setAttractionId(AttractionExtractor.getLong("id"));
+                            attraction.setAttractionId(AttractionExtractor.getLong("attraction_id"));
                             attraction.setName(AttractionExtractor.getString("name"));
                             attraction.setDescription(AttractionExtractor.getString("description"));
                             attraction.setCity(new City(
                                     AttractionExtractor.getLong("city_id"),
-                                    AttractionExtractor.getString("city_name")));
+                                    AttractionExtractor.getString("cities")));
                         }
                         String tag = AttractionExtractor.getString("tags");
                         if (tag != null) {
@@ -110,7 +110,7 @@ public class TouristRepository {
         source.addValue("tags", attraction.getTags());
         String tagAmountString = attraction.getTags().stream().map(Tags -> "?").collect(Collectors.joining(", "));
         String sqlAttachTags = "INSERT INTO attraction_tags (attraction_id, tag_id) " +
-                                "SELECT (SELECT attraction_id FROM attraction WHERE attraction_name = ?), tag_id FROM tags WHERE tag_name IN (" + tagAmountString + ")";
+                "SELECT (SELECT attraction_id FROM attraction WHERE attraction_name = ?), tag_id FROM tags WHERE tag_name IN (" + tagAmountString + ")";
         jdbc.update(sqlAttachTags, attraction.getName(), attraction.getTags(), extractor);
     }
 
