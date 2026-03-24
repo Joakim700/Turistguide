@@ -1,4 +1,5 @@
 package com.example.turistguide.repository.jdbc;
+
 import com.example.turistguide.model.City;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
@@ -6,17 +7,20 @@ import com.example.turistguide.repository.mapper.AttractionExtractor;
 import com.example.turistguide.repository.mapper.CityMapper;
 import jakarta.annotation.Nullable;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Types;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class TouristRepository {
 
     private final JdbcTemplate jdbc;
-    //private final AttractionExtractor extractor = new AttractionExtractor();
+    private final AttractionExtractor extractor = new AttractionExtractor();
+    private final CityMapper mapper = new CityMapper();
 
 
     public TouristRepository(JdbcTemplate jdbc) {
@@ -36,7 +40,6 @@ public class TouristRepository {
         String sql = "SELECT id, name, description, city, tags FROM attractions ORDER BY id";
         return jdbc.query(sqlQuery(), new AttractionExtractor());
     }
-
 
 
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
@@ -73,34 +76,50 @@ public class TouristRepository {
         );
     }
 
-    @Transactional // Tells the database to treat all commands as a single move. This makes it possible to redo everything and start over.
-    public void updateAttraction(TouristAttraction attraction, int id) {
+    @Transactional
+    // Tells the database to treat all commands as a single move. This makes it possible to redo everything and start over.
+    public void updateAttraction(TouristAttraction attraction) {
 
         String sqlQuery = "UPDATE attractions SET name = ?, description = ?, city_id = ? WHERE attraction_id = ?";
-        String sqlDeleteTags = "DELETE FROM attractions_tags WHERE attraction_id = ?" ;
+        String sqlDeleteTags = "DELETE FROM attractions_tags WHERE attraction_name = ?";
 
-        jdbc.update(sqlDeleteTags, id);
+        jdbc.update(sqlDeleteTags, attraction.getName());
 
         for (TouristTags tags : attraction.getTags()) {
 
-            String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_name) VALUES (?, ?)";
-            jdbc.update(sqlInsertTags, id, tags.name());
-                }
+            String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_id) SELECT (SELECT attraction_id FROM attraction WHERE attraction_name = ?), tag_id FROM tags WHERE tag_name = ?";
+            jdbc.update(sqlInsertTags, attraction.getName(), tags.name());
+        }
 
-        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity(), id);
+        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity());
     }
 
 
+    public void addAttraction(TouristAttraction attraction) {
+        String cityQuery = "SELECT * FROM cities";
+        Boolean isFound = false;
+        for (City c : jdbc.query(cityQuery, mapper)) {
+            if (c.getName() == attraction.getCity().getName()) {
+                isFound = true;
+            }
+        }
+        if (!isFound) {
+            jdbc.update("INSERT INTO cities (city_name) VALUES = ?", attraction.getCity().getName());
+        }
+        String sqlQuery = "INSERT INTO ATTRACTIONS (attraction_name, attraction_description, city_id) VALUES (?,?,(SELECT city_id FROM cities WHERE city_name = ?);";
+        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity().getName());
+        MapSqlParameterSource source = new MapSqlParameterSource();
+        source.addValue("tags", attraction.getTags());
+        String tagAmountString = attraction.getTags().stream().map(Tags -> "?").collect(Collectors.joining(", "));
+        String sqlAttachTags = "INSERT INTO attraction_tags (attraction_id, tag_id) " +
+                                "SELECT (SELECT attraction_id FROM attraction WHERE attraction_name = ?), tag_id FROM tags WHERE tag_name IN (" + tagAmountString + ")";
+        jdbc.update(sqlAttachTags, attraction.getName(), attraction.getTags(), extractor);
+    }
 
 
-//
-//    public void saveAttraction(TouristAttraction attraction) {
-//        attractions.add(attraction);
-//    }
-//
     public void deleteAttraction(String name) {
         String sql = "DELETE FROM attractions WHERE name = ?";
-        jdbc.update(sql);
+        jdbc.update(sql, name);
     }
 }
 
