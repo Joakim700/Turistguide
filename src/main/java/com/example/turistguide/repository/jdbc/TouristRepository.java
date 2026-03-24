@@ -5,7 +5,6 @@ import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
 import com.example.turistguide.repository.mapper.AttractionExtractor;
 import com.example.turistguide.repository.mapper.CityMapper;
-import jakarta.annotation.Nullable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
@@ -37,8 +36,7 @@ public class TouristRepository {
     }
 
     public List<TouristAttraction> getAllAttractions() {
-        String sql = "SELECT id, name, description, city, tags FROM attractions ORDER BY id";
-        return jdbc.query(sqlQuery(), new AttractionExtractor());
+        return jdbc.query(sqlQuery(), extractor);
     }
 
 
