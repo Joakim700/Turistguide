@@ -48,7 +48,6 @@ public class TouristRepository {
         return jdbc.query(sqlQuery(), extractor);
     }
 
-
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
 
         String sql = sqlName();
@@ -70,6 +69,7 @@ public class TouristRepository {
                                     AttractionExtractor.getLong("city_id"),
                                     AttractionExtractor.getString("cities")));
                         }
+
                         String tag = AttractionExtractor.getString("tags");
                         if (tag != null) {
                             tags.add(TouristTags.valueOf(tag));
@@ -89,8 +89,6 @@ public class TouristRepository {
         String sqlQuery = "UPDATE attractions SET attraction_name = ?, attraction_description = ? WHERE attraction_id = ?";
         String sqlDeleteTags = "DELETE FROM attraction_tags WHERE attraction_id = ?";
 
-        jdbc.update(sqlDeleteTags, attraction.getAttractionId());
-
         for (TouristTags tags : attraction.getTags()) {
 
             String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_id) SELECT (SELECT attraction_id FROM attractions WHERE attraction_id = ?), tag_id FROM tags WHERE tag_name = ?";
@@ -99,7 +97,6 @@ public class TouristRepository {
 
         jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getAttractionId());
     }
-
 
     public void addAttraction(TouristAttraction attraction) {
         String cityQuery = "SELECT * FROM cities";
@@ -122,6 +119,7 @@ public class TouristRepository {
         jdbc.update(sqlAttachTags, attraction.getName(), attraction.getTags(), extractor);
     }
 
+    }
 
     public void deleteAttraction(String name) {
         String sql = "DELETE FROM attractions WHERE attraction_name = ?";

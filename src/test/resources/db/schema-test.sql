@@ -18,7 +18,7 @@ CREATE TABLE cities (
 CREATE TABLE attractions (
                              attraction_id BIGINT PRIMARY KEY AUTO_INCREMENT,
                              attraction_name VARCHAR(255) NOT NULL,
-                             attraction_description CLOB,
+                             attraction_description BLOB,
                              city_id BIGINT,
                              CONSTRAINT fk_city FOREIGN KEY (city_id) REFERENCES cities(city_id) ON DELETE CASCADE
 );
@@ -26,7 +26,7 @@ CREATE TABLE attractions (
 -- Tags table
 CREATE TABLE tags (
                       tag_id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                      tag_name VARCHAR(50) NOT NULL UNIQUE
+                      tag_name ENUM NOT NULL UNIQUE
 );
 
 -- Attraction-Tags join table
@@ -44,7 +44,7 @@ CREATE VIEW attraction_JOINS_details AS
 SELECT
     a.attraction_name,
     c.city_name,
-    STRING_AGG(t.tag_name, ', ') AS all_tags
+    GROUP_CONCAT(t.tag_name SEPARATOR ', ') AS all_tags
 FROM attractions a
          JOIN cities c ON a.city_id = c.city_id
          JOIN attraction_tags at ON a.attraction_id = at.attraction_id
