@@ -35,6 +35,15 @@ public class TouristRepository {
                 "ORDER BY a.name";
     }
 
+    public String sqlName() {
+        return "SELECT a.attraction_id, a.name, a.description, c.city_id, c.city_name AS cities, t.tag_name AS tags " +
+                "FROM attractions a " +
+                "JOIN cities c ON c.city_id = a.city_id " +
+                "JOIN attraction_tags at ON a.attraction_id = at.attraction_id " +
+                "JOIN tags t ON at.tag_id = t.tag_id " +
+                "WHERE a.name = ?";
+    }
+
     public List<TouristAttraction> getAllAttractions() {
         return jdbc.query(sqlQuery(), extractor);
     }
@@ -42,7 +51,7 @@ public class TouristRepository {
 
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
 
-        String sql = sqlQuery();
+        String sql = sqlName();
 
         return jdbc.query(sql, new Object[]{name},
                 new int[]{Types.VARCHAR},
