@@ -33,18 +33,23 @@ public class AttractionExtractor implements ResultSetExtractor<List<TouristAttra
                         city,
                         new HashSet<>()
                 );
-
+                touristAttractionHashMap.put(id, attraction);
             }
 
-            String tagVal = rs.getString("tags");
+            String tagsString = rs.getString("tags");
 
-            if (tagVal != null) {
-                attraction.getTags().add(TouristTags.valueOf(tagVal));
-            }
+            if (tagsString != null && !tagsString.isEmpty()) {
+                String[] tagArray = tagsString.split(",\\s*");
 
-            touristAttractionHashMap.put(id, attraction);
-
+                for (String tagName : tagArray) {
+                    TouristTags tag = TouristTags.valueOf(tagName.trim().toUpperCase());
+                    attraction.addTags(tag);
+                }
+        }
+            rowNum++;
         }
         return new ArrayList<>(touristAttractionHashMap.values());
     }
 }
+
+

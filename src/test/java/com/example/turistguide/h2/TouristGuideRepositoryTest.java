@@ -5,7 +5,9 @@ import com.example.turistguide.repository.jdbc.TouristRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,6 +24,9 @@ public class TouristGuideRepositoryTest {
     private TouristRepository repository;
 
     @Autowired
+    JdbcTemplate jdbcTemplate;
+
+    @Autowired
     private ObjectMapper mapper;
 
     @Test
@@ -30,16 +35,17 @@ public class TouristGuideRepositoryTest {
 
     @Test
     void checkSchemaFile(){
-        URL url = getClass().getClassLoader().getResource("db/data-test.sql");
-        URL url2 = getClass().getClassLoader().getResource("db/schema-test.sql");
+        URL url = getClass().getClassLoader().getResource("h2init.sql");
         System.out.println("URL= " + url);
-        System.out.println("URL= " + url2);
     }
 
     @Test
     void getAllAttractions() {
 
         List<TouristAttraction> attractionList = repository.getAllAttractions();
+
+        Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM attractions", Integer.class);
+        System.out.println("ANTAL ATTRAKTIONER I DB: " + count);
 
         assertNotNull(attractionList);
         assertThat(attractionList.size()).isEqualTo(6);
