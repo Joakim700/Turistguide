@@ -1,5 +1,5 @@
 -- INSERT CITIES (H2 version)
-MERGE INTO cities (city_name) KEY(city_name) VALUES
+INSERT INTO cities (city_name) VALUES
     ('Paris'),
     ('Beijing'),
     ('Copenhagen'),
@@ -7,7 +7,7 @@ MERGE INTO cities (city_name) KEY(city_name) VALUES
     ('London');
 
 -- INSERT TAGS
-MERGE INTO tags (tag_name) KEY(tag_name) VALUES
+INSERT INTO tags (tag_name) VALUES
     ('BØRNEVENLIG'), ('GRATIS'), ('MUSEUM'), ('DYR'),
     ('KUNST'), ('NATUR'), ('SIGHTSEEING'), ('OPLEVELSE'),
     ('MINDESMÆRKE'), ('VERDENSKENDT');
@@ -46,7 +46,7 @@ WHERE a.attraction_name = 'Eiffel Tower' AND t.tag_name IN ('VERDENSKENDT', 'BØ
 INSERT INTO attraction_tags (attraction_id, tag_id)
 SELECT a.attraction_id, t.tag_id
 FROM attractions a, tags t
-WHERE a.attraction_name = 'Great Wall of China' AND t.tag_name IN ('BØRNEVENLIG', 'GRATIS', 'MINDESMÆRKE', 'SIGHTSEEING', 'VERDENSKENDT');
+WHERE a.attraction_name = 'Great Wall of China' AND t.tag_name IN  ('BØRNEVENLIG', 'GRATIS', 'MINDESMÆRKE', 'SIGHTSEEING', 'VERDENSKENDT');
 
 INSERT INTO attraction_tags (attraction_id, tag_id)
 SELECT a.attraction_id, t.tag_id

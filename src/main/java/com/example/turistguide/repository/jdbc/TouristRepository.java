@@ -33,11 +33,18 @@ public class TouristRepository {
     }
 
     public List<TouristAttraction> getAllAttractions() {
-        String sql = "SELECT id, name, description, city, tags FROM attractions ORDER BY id";
+        String sql = "SELECT a.attraction_id, a.attraction_name, a.attraction_description, " +
+                "c.city_id, c.city_name, " +
+                "GROUP_CONCAT(t.tag_name SEPARATOR ', ') AS tags " + // Samler alle tags i én kolonne
+                "FROM attractions a " +
+                "JOIN cities c ON a.city_id = c.city_id " +
+                "LEFT JOIN attraction_tags at ON a.attraction_id = at.attraction_id " +
+                "LEFT JOIN tags t ON at.tag_id = t.tag_id " +
+                "GROUP BY a.attraction_id, a.attraction_name, a.attraction_description, c.city_id, c.city_name " +
+                "ORDER BY a.attraction_id";
+
         return jdbc.query(sql, extractor);
     }
-
-
 
     public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
 
@@ -60,6 +67,7 @@ public class TouristRepository {
                                     AttractionExtractor.getLong("city_id"),
                                     AttractionExtractor.getString("city_name")));
                         }
+
                         String tag = AttractionExtractor.getString("tags");
                         if (tag != null) {
                             tags.add(TouristTags.valueOf(tag));
@@ -79,8 +87,8 @@ public class TouristRepository {
         String sqlQuery = "UPDATE attractions SET name = ?, description = ?, city_id = ? WHERE attraction_id = ?";
         String sqlDeleteTags = "DELETE FROM attractions_tags WHERE attraction_id = ?" ;
 
-        jdbc.update(sqlDeleteTags, id);
 
+        jdbc.update(sqlDeleteTags, id);
         for (TouristTags tags : attraction.getTags()) {
 
             String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_name) VALUES (?, ?)";
@@ -91,13 +99,10 @@ public class TouristRepository {
     }
 
 
+    public void createAttraction() {
 
+    }
 
-//
-//    public void saveAttraction(TouristAttraction attraction) {
-//        attractions.add(attraction);
-//    }
-//
     public void deleteAttraction(String name) {
         String sql = "DELETE FROM attractions WHERE name = ?";
         jdbc.update(sql);

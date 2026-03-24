@@ -21,7 +21,7 @@ public class AttractionExtractor implements ResultSetExtractor<List<TouristAttra
         int rowNum = 0;
 
         while (rs.next()) {
-            Long id = rs.getLong("id");
+            Long id = rs.getLong("attraction_id");
             TouristAttraction attraction = touristAttractionHashMap.get(id);
 
             if (attraction == null) {
