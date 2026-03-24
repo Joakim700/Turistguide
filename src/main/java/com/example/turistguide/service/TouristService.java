@@ -41,15 +41,15 @@ public class TouristService {
         }
         repository.addAttraction(attraction);
     }
-//
-//    public void updateAttraction(TouristAttraction attraction) {
-//
-//            if (attraction == null) {
-//                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
-//            }
-//        repository.updateAttraction(attraction);
-//    }
-//
+
+    public void updateAttraction(TouristAttraction attraction) {
+
+            if (attraction == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Try again");
+            }
+        repository.updateAttraction(attraction);
+    }
+
     public void deleteAttraction(String name) {
         repository.deleteAttraction(name);
     }

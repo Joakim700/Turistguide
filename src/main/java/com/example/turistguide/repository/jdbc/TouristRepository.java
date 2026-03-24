@@ -78,20 +78,20 @@ public class TouristRepository {
 
     @Transactional
     // Tells the database to treat all commands as a single move. This makes it possible to redo everything and start over.
-    public void updateAttraction(TouristAttraction attraction, int id) {
+    public void updateAttraction(TouristAttraction attraction) {
 
         String sqlQuery = "UPDATE attractions SET name = ?, description = ?, city_id = ? WHERE attraction_id = ?";
-        String sqlDeleteTags = "DELETE FROM attractions_tags WHERE attraction_id = ?";
+        String sqlDeleteTags = "DELETE FROM attractions_tags WHERE attraction_name = ?";
 
-        jdbc.update(sqlDeleteTags, id);
+        jdbc.update(sqlDeleteTags, attraction.getName());
 
         for (TouristTags tags : attraction.getTags()) {
 
-            String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_name) VALUES (?, ?)";
-            jdbc.update(sqlInsertTags, id, tags.name());
+            String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_name) (SELECT attraction_id FROM attraction WHERE attraction_name = ?) VALUES (?, ?)";
+            jdbc.update(sqlInsertTags, attraction.getName(), tags.name());
         }
 
-        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity(), id);
+        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity());
     }
 
 
