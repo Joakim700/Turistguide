@@ -28,17 +28,17 @@ public class TouristRepository {
     }
 
     public String sqlQuery() {
-        return "SELECT a.attraction_id, a.name, a.description, c.id as city_id, c.city_name AS city, t.tags AS tags" +
-                "FROM attractions a" +
-                "JOIN cities c on c.city_id = a.city_id" +
-                "JOIN attraction_tags at ON a.attraction_id = at.attraction_id" +
-                "JOIN tags t ON at.attraction_id = t.id" +
-                "WHERE a.name = ?";
+        return "SELECT a.attraction_id, a.name, a.description, c.city_name AS cities, t.tag_name AS tags " +
+                "FROM attractions a " +
+                "JOIN cities c ON c.city_id = a.city_id " +
+                "JOIN attraction_tags at ON a.attraction_id = at.attraction_id " +
+                "JOIN tags t ON at.tag_id = t.tag_id " +
+                "ORDER BY a.name";
     }
 
     public List<TouristAttraction> getAllAttractions() {
         String sql = "SELECT id, name, description, city, tags FROM attractions ORDER BY id";
-        return jdbc.query(sql, extractor);
+        return jdbc.query(sqlQuery(), new AttractionExtractor());
     }
 
 

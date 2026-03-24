@@ -18,22 +18,22 @@ public class AttractionExtractor implements ResultSetExtractor<List<TouristAttra
     public List<TouristAttraction> extractData(ResultSet rs) throws SQLException, DataAccessException {
 
         HashMap<Long, TouristAttraction> touristAttractionHashMap = new LinkedHashMap<>();
-        int rowNum = 0;
 
         while (rs.next()) {
-            Long id = rs.getLong("id");
+            Long id = rs.getLong("attraction_id");
             TouristAttraction attraction = touristAttractionHashMap.get(id);
 
             if (attraction == null) {
-                City city = cityMapper.mapRow(rs, rowNum);
+                City city = new City(0L, rs.getString("cities"));
 
                 attraction = new TouristAttraction(
                         id,
-                        rs.getString("attraction_name"),
-                        rs.getString("attraction_description"),
+                        rs.getString("name"),
+                        rs.getString("description"),
                         city,
                         new HashSet<>()
                 );
+
             }
 
             String tagVal = rs.getString("tags");
@@ -41,7 +41,9 @@ public class AttractionExtractor implements ResultSetExtractor<List<TouristAttra
             if (tagVal != null) {
                 attraction.getTags().add(TouristTags.valueOf(tagVal));
             }
-            rowNum++;
+
+            touristAttractionHashMap.put(id, attraction);
+
         }
         return new ArrayList<>(touristAttractionHashMap.values());
     }
