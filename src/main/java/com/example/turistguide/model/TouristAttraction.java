@@ -37,6 +37,10 @@ public class TouristAttraction {
         this.attractionId = Id;
     }
 
+    public Long getAttractionId(){
+        return attractionId;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }

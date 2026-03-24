@@ -16,7 +16,7 @@ public class AttractionExtractor implements ResultSetExtractor<List<TouristAttra
 
     @Override
     public List<TouristAttraction> extractData(ResultSet rs) throws SQLException, DataAccessException {
-
+        int rowNum = 0;
         HashMap<Long, TouristAttraction> touristAttractionHashMap = new LinkedHashMap<>();
 
         while (rs.next()) {
