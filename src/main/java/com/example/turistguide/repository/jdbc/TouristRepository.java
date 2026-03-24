@@ -83,21 +83,19 @@ public class TouristRepository {
         );
     }
 
-    @Transactional
     // Tells the database to treat all commands as a single move. This makes it possible to redo everything and start over.
     public void updateAttraction(TouristAttraction attraction) {
 
-        String sqlQuery = "UPDATE attractions SET name = ?, description = ?, city_id = ? WHERE attraction_id = ?";
-        String sqlDeleteTags = "DELETE FROM attractions_tags WHERE attraction_name = ?";
+        String sqlQuery = "UPDATE attractions SET attraction_name = ?, attraction_description = ? WHERE attraction_id = ?";
+        String sqlDeleteTags = "DELETE FROM attraction_tags WHERE attraction_id = ?";
 
-        jdbc.update(sqlDeleteTags, id);
         for (TouristTags tags : attraction.getTags()) {
 
-            String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_id) SELECT (SELECT attraction_id FROM attraction WHERE attraction_name = ?), tag_id FROM tags WHERE tag_name = ?";
-            jdbc.update(sqlInsertTags, attraction.getName(), tags.name());
+            String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_id) SELECT (SELECT attraction_id FROM attractions WHERE attraction_id = ?), tag_id FROM tags WHERE tag_name = ?";
+            jdbc.update(sqlInsertTags, attraction.getAttractionId(), tags.name());
         }
 
-        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity());
+        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getAttractionId());
     }
 
     public void addAttraction(TouristAttraction attraction) {
@@ -124,7 +122,7 @@ public class TouristRepository {
     }
 
     public void deleteAttraction(String name) {
-        String sql = "DELETE FROM attractions WHERE name = ?";
+        String sql = "DELETE FROM attractions WHERE attraction_name = ?";
         jdbc.update(sql, name);
     }
 }
