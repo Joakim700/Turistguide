@@ -87,7 +87,7 @@ public class TouristRepository {
 
         for (TouristTags tags : attraction.getTags()) {
 
-            String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_name) (SELECT attraction_id FROM attraction WHERE attraction_name = ?) VALUES (?, ?)";
+            String sqlInsertTags = "INSERT INTO attraction_tags(attraction_id, tag_id) SELECT (SELECT attraction_id FROM attraction WHERE attraction_name = ?), tag_id FROM tags WHERE tag_name = ?";
             jdbc.update(sqlInsertTags, attraction.getName(), tags.name());
         }
 
