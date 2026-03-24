@@ -61,7 +61,6 @@ public class TouristAttraction {
         tags.add(tagToAdd);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
