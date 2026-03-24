@@ -42,29 +42,29 @@ public class TouristController {
         model.addAttribute("attraction", attraction);
         return "attraction";
     }
-//
-//    @GetMapping("/attractions/{name}/tags")
-//    public String getAttractionTags(@PathVariable String name, Model model) {
-//        TouristAttraction attraction = service.getAttractionByName(name);
-//        model.addAttribute("tags", attraction.getTags());
-//        return "tags";
-//    }
-//
-//    @GetMapping("/attractions/add")
-//    public String addAttraction(Model model) {
-//        TouristAttraction attraction = new TouristAttraction();
-//        model.addAttribute("attraction", attraction);
-//        model.addAttribute("tags", TouristTags.values());
-//        return "addnewattraction";
-//    }
-//
-//    @GetMapping("/attractions/{name}/edit")
-//    public String editAttraction(@PathVariable String name, Model model) {
-//        TouristAttraction attraction = service.getAttractionByName(name);
-//        model.addAttribute("attraction", attraction);
-//        model.addAttribute("allTags", TouristTags.values());
-//        return "update-attraction";
-//    }
+
+    @GetMapping("/attractions/{name}/tags")
+    public String getAttractionTags(@PathVariable String name, Model model) {
+        TouristAttraction attraction = service.getAttractionByName(name);
+        model.addAttribute("tags", attraction.getTags());
+        return "tags";
+    }
+
+    @GetMapping("/attractions/add")
+    public String addAttraction(Model model) {
+        TouristAttraction attraction = new TouristAttraction();
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("tags", TouristTags.values());
+        return "addnewattraction";
+    }
+
+    @GetMapping("/attractions/{name}/edit")
+    public String editAttraction(@PathVariable String name, Model model) {
+        TouristAttraction attraction = service.getAttractionByName(name);
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("allTags", TouristTags.values());
+        return "update-attraction";
+    }
 
     @PostMapping("/attractions/save")
     public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
