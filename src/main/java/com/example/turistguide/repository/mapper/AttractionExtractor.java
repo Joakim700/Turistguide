@@ -28,8 +28,8 @@ public class AttractionExtractor implements ResultSetExtractor<List<TouristAttra
 
                 attraction = new TouristAttraction(
                         id,
-                        rs.getString("name"),
-                        rs.getString("description"),
+                        rs.getString("attraction_name"),
+                        rs.getString("attraction_description"),
                         city,
                         new HashSet<>()
                 );
