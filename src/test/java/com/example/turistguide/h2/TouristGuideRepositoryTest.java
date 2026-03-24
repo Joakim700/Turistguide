@@ -1,20 +1,23 @@
 package com.example.turistguide.h2;
 
+import com.example.turistguide.model.City;
 import com.example.turistguide.model.TouristAttraction;
+import com.example.turistguide.model.TouristTags;
 import com.example.turistguide.repository.jdbc.TouristRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.AutoConfigureWebClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.assertj.core.api.InstanceOfAssertFactories.LONG;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -25,9 +28,6 @@ public class TouristGuideRepositoryTest {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private ObjectMapper mapper;
 
     @Test
     void contextLoad() {
@@ -44,14 +44,42 @@ public class TouristGuideRepositoryTest {
 
         List<TouristAttraction> attractionList = repository.getAllAttractions();
 
+        // DEBUG CHECK
         Integer count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM attractions", Integer.class);
         System.out.println("ANTAL ATTRAKTIONER I DB: " + count);
 
         assertNotNull(attractionList);
         assertThat(attractionList.size()).isEqualTo(6);
         assertThat(attractionList.get(0).getName()).isEqualTo("Eiffel Tower");
-        assertThat(attractionList.get(1).getName()).isEqualTo("Great Wall of China");
+        assertThat(attractionList.get(1).getName()).isEqualTo("Grand Canyon");
     }
+
+   @Test
+   void getAttractionByName() {
+
+        City city = new City(1L, "Paris");
+        Set<TouristTags> tags = new HashSet<>();
+        tags.add(TouristTags.OPLEVELSE);
+        tags.add(TouristTags.SIGHTSEEING);
+
+        TouristAttraction attraction = new TouristAttraction(1L, "Eiffel Tower", "Et tårn", city, tags);
+
+        repository.getAttractionByName("Eiffel Tower");
+
+        assertNotNull(attraction);
+        assertEquals("Eiffel Tower", attraction.getName());
+        assertEquals("Et tårn", attraction.getDescription());
+        assertEquals("Paris", attraction.getCity().getName());
+        assertTrue(attraction.getTags().contains(TouristTags.OPLEVELSE));
+       assertTrue(attraction.getTags().contains(TouristTags.SIGHTSEEING));
+   }
+
+   @Test
+    void updateAttractionCheck() {
+
+
+
+   }
 
 
 

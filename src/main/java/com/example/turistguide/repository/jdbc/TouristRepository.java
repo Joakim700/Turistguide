@@ -28,9 +28,9 @@ public class TouristRepository {
     public String sqlQuery() {
         return "SELECT a.attraction_id, a.attraction_name, a.attraction_description, c.city_name AS cities, t.tag_name AS tags " +
                 "FROM attractions a " +
-                "JOIN cities c ON c.city_id = a.city_id " +
-                "JOIN attraction_tags at ON a.attraction_id = at.attraction_id " +
-                "JOIN tags t ON at.tag_id = t.tag_id " +
+                "LEFT JOIN cities c ON c.city_id = a.city_id " +
+                "LEFT JOIN attraction_tags at ON a.attraction_id = at.attraction_id " +
+                "LEFT JOIN tags t ON at.tag_id = t.tag_id " +
                 "ORDER BY a.attraction_name";
     }
 
