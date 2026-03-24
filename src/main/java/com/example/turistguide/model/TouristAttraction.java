@@ -9,6 +9,7 @@ public class TouristAttraction {
     String description;
     City city;
     Set<TouristTags> tags;
+    private String cityName;
 
     public TouristAttraction(Long attractionId, String name, String description, City city, Set<TouristTags> tags) {
         this.attractionId = attractionId;
@@ -16,6 +17,7 @@ public class TouristAttraction {
         this.description = description;
         this.city = city;
         this.tags = tags;
+        this.cityName = cityName;
     }
 
     public TouristAttraction() {
@@ -39,6 +41,13 @@ public class TouristAttraction {
 
     public Long getAttractionId(){
         return attractionId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 
     public void setDescription(String description) {

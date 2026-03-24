@@ -90,18 +90,19 @@ public class TouristRepository {
 
         jdbc.update(sqlDeleteTags,attraction.getAttractionId());
 
-        String cityQuery = "SELECT * FROM cities";
-        Boolean isFound = false;
-        while(!isFound) {
-            for (City c : jdbc.query(cityQuery, mapper)) {
-                if (c.getName().equals(attraction.getCity().getName())) {
-                    isFound = true;
-                }
-            }
-        }
-        if (!isFound) {
+        String cityCheckQuery = "SELECT COUNT(*) FROM cities WHERE city_name = ?";
+        int count = jdbc.queryForObject(cityCheckQuery, Integer.class, attraction.getCity().getName());
+
+        if (count == 0) {
             jdbc.update("INSERT INTO cities (city_name) VALUES (?)", attraction.getCity().getName());
         }
+
+
+        Long cityId = jdbc.queryForObject(
+                "SELECT city_id FROM cities WHERE city_name = ?",
+                Long.class,
+                attraction.getCity().getName()
+        );
 
         for (TouristTags tags : attraction.getTags()) {
 
@@ -109,30 +110,44 @@ public class TouristRepository {
             jdbc.update(sqlInsertTags, attraction.getAttractionId(), tags.name());
         }
 
-        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity().getCityId(), attraction.getAttractionId());
+        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), cityId, attraction.getAttractionId());
     }
 
     public void addAttraction(TouristAttraction attraction) {
-        String cityQuery = "SELECT * FROM cities";
-        Boolean isFound = false;
-        while(!isFound) {
-            for (City c : jdbc.query(cityQuery, mapper)) {
-                if (c.getName().equals(attraction.getCity().getName())) {
-                    isFound = true;
-                }
-            }
-        }
-        if (!isFound) {
+        int count = jdbc.queryForObject(
+                "SELECT COUNT(*) FROM cities WHERE city_name = ?",
+                Integer.class,
+                attraction.getCity().getName()
+        );
+        if (count == 0) {
             jdbc.update("INSERT INTO cities (city_name) VALUES (?)", attraction.getCity().getName());
         }
-        String sqlQuery = "INSERT INTO ATTRACTIONS (attraction_name, attraction_description, city_id) VALUES (?,?,(SELECT city_id FROM cities WHERE city_name = ?);";
-        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity().getName());
-        MapSqlParameterSource source = new MapSqlParameterSource();
-        source.addValue("tags", attraction.getTags());
-        String tagAmountString = attraction.getTags().stream().map(Tags -> "?").collect(Collectors.joining(", "));
+
+        Long cityId = jdbc.queryForObject(
+                "SELECT city_id FROM cities WHERE city_name = ?",
+                Long.class,
+                attraction.getCity().getName()
+        );
+
+        jdbc.update(
+                "INSERT INTO attractions (attraction_name, attraction_description, city_id) VALUES (?, ?, ?)",
+                attraction.getName(), attraction.getDescription(), cityId
+        );
+
+        String tagAmountString = attraction.getTags().stream()
+                .map(t -> "?")
+                .collect(Collectors.joining(", "));
+
         String sqlAttachTags = "INSERT INTO attraction_tags (attraction_id, tag_id) " +
-                "SELECT (SELECT attraction_id FROM attraction WHERE attraction_name = ?), tag_id FROM tags WHERE tag_name IN (" + tagAmountString + ")";
-        jdbc.update(sqlAttachTags, attraction.getName(), attraction.getTags(), extractor);
+                "SELECT (SELECT attraction_id FROM attractions WHERE attraction_name = ?), " +
+                "tag_id FROM tags WHERE tag_name IN (" + tagAmountString + ")";
+
+        List<Object> params = new ArrayList<>();
+        params.add(attraction.getName());
+        params.addAll(attraction.getTags().stream()
+                .map(tag -> tag.name())
+                .collect(Collectors.toList()));
+        jdbc.update(sqlAttachTags, params.toArray());
     }
 
     public void deleteAttraction(String name) {

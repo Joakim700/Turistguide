@@ -1,5 +1,6 @@
 package com.example.turistguide.service;
 
+import com.example.turistguide.model.City;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.repository.jdbc.TouristRepository;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,9 @@ public class TouristService {
 
 
     public void createAttraction(TouristAttraction attraction) {
+        City city = new City();
+        city.setName(attraction.getCityName());
+        attraction.setCity(city);
 
         for (TouristAttraction a : repository.getAllAttractions()) {
 
