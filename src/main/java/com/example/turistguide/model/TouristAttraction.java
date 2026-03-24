@@ -57,7 +57,9 @@ public class TouristAttraction {
         this.tags = tags;
     }
 
-
+    public Long getAttractionId() {
+        return attractionId;
+    }
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
