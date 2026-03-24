@@ -65,19 +65,19 @@ public class TouristController {
 //        model.addAttribute("allTags", TouristTags.values());
 //        return "update-attraction";
 //    }
-//
-//    @PostMapping("/attractions/save")
-//    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
-//        service.createAttraction(touristAttraction);
-//        return "redirect:/touristguide/attractions";
-//    }
-//
-//    @PostMapping("/attractions/update")
-//    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
-//        service.updateAttraction(attraction);
-//        return "redirect:/touristguide/attractions";
-//    }
-//
+
+    @PostMapping("/attractions/save")
+    public String addAttraction(@ModelAttribute TouristAttraction touristAttraction) {
+        service.createAttraction(touristAttraction);
+        return "redirect:/touristguide/attractions";
+    }
+
+    @PostMapping("/attractions/update")
+    public String updateAttraction(@ModelAttribute TouristAttraction attraction) {
+        service.updateAttraction(attraction);
+        return "redirect:/touristguide/attractions";
+    }
+
     @PostMapping("/attractions/delete/{name}")
     public String deleteAttraction(@PathVariable String name) {
         service.deleteAttraction(name);
