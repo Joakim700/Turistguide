@@ -9,6 +9,7 @@ public class City {
         this.cityId = cityId;
         this.name = name;
     }
+    public City() {}
 
     public Long getCityId() {
         return cityId;

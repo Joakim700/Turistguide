@@ -82,11 +82,25 @@ public class TouristRepository {
         );
     }
 
-    // Tells the database to treat all commands as a single move. This makes it possible to redo everything and start over.
     public void updateAttraction(TouristAttraction attraction) {
 
-        String sqlQuery = "UPDATE attractions SET attraction_name = ?, attraction_description = ? WHERE attraction_id = ?";
+        String sqlQuery = "UPDATE attractions SET attraction_name = ?, attraction_description = ?, city_id = ? WHERE attraction_id = ?";
         String sqlDeleteTags = "DELETE FROM attraction_tags WHERE attraction_id = ?";
+
+        jdbc.update(sqlDeleteTags,attraction.getAttractionId());
+
+        String cityQuery = "SELECT * FROM cities";
+        Boolean isFound = false;
+        while(!isFound) {
+            for (City c : jdbc.query(cityQuery, mapper)) {
+                if (c.getName() == attraction.getCity().getName()) {
+                    isFound = true;
+                }
+            }
+        }
+        if (!isFound) {
+            jdbc.update("INSERT INTO cities (city_name) VALUES (?)", attraction.getCity().getName());
+        }
 
         for (TouristTags tags : attraction.getTags()) {
 
@@ -94,19 +108,21 @@ public class TouristRepository {
             jdbc.update(sqlInsertTags, attraction.getAttractionId(), tags.name());
         }
 
-        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getAttractionId());
+        jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity().getCityId(), attraction.getAttractionId());
     }
 
     public void addAttraction(TouristAttraction attraction) {
         String cityQuery = "SELECT * FROM cities";
         Boolean isFound = false;
-        for (City c : jdbc.query(cityQuery, mapper)) {
-            if (c.getName() == attraction.getCity().getName()) {
-                isFound = true;
+        while(!isFound) {
+            for (City c : jdbc.query(cityQuery, mapper)) {
+                if (c.getName() == attraction.getCity().getName()) {
+                    isFound = true;
+                }
             }
         }
         if (!isFound) {
-            jdbc.update("INSERT INTO cities (city_name) VALUES = ?", attraction.getCity().getName());
+            jdbc.update("INSERT INTO cities (city_name) VALUES (?)", attraction.getCity().getName());
         }
         String sqlQuery = "INSERT INTO ATTRACTIONS (attraction_name, attraction_description, city_id) VALUES (?,?,(SELECT city_id FROM cities WHERE city_name = ?);";
         jdbc.update(sqlQuery, attraction.getName(), attraction.getDescription(), attraction.getCity().getName());
