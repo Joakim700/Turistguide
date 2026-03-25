@@ -46,6 +46,7 @@ public class TouristAttraction {
     public String getCityName() {
         return cityName;
     }
+
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }

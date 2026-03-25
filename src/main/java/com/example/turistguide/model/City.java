@@ -11,16 +11,8 @@ public class City {
     }
     public City() {}
 
-    public Long getCityId() {
-        return cityId;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setCityId(Long cityId) {
-        this.cityId = cityId;
     }
 
     public void setName(String name) {
