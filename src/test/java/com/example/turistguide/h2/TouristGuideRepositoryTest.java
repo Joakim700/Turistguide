@@ -4,6 +4,7 @@ import com.example.turistguide.model.City;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
 import com.example.turistguide.repository.jdbc.TouristRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -77,9 +78,39 @@ public class TouristGuideRepositoryTest {
    @Test
     void updateAttractionCheck() {
 
+       City city = new City(1L, "London");
+       Set<TouristTags> tags = new HashSet<>();
+       tags.add(TouristTags.OPLEVELSE);
+       tags.add(TouristTags.SIGHTSEEING);
 
+       TouristAttraction updatedAttraction = new TouristAttraction(1L, "Big Ben", "En klokke i en storby", city, tags);
 
+       repository.updateAttraction(updatedAttraction);
+
+       TouristAttraction result = repository.getAttractionByName("Big Ben");
+
+       assertNotNull(result);
+       assertEquals("Big Ben", result.getName());
+       assertEquals("En klokke i en storby", result.getDescription());
+
+       assertEquals(2, result.getTags().size());
+       assertTrue(result.getTags().contains(TouristTags.OPLEVELSE));
+       assertTrue(result.getTags().contains(TouristTags.SIGHTSEEING));
    }
+
+    @Test
+    void checkForDeleteAttraction() {
+
+        City city = new City(1L, "London");
+
+        TouristAttraction attraction = new TouristAttraction(1L, "Big Ben", "En stor klokke", city, new HashSet<>());
+
+        repository.addAttraction(attraction);
+
+        repository.deleteAttraction("Big Ben");
+
+        assertThat(repository.getAttractionByName("Big Ben")).isNull();
+    }
 
 
 

@@ -134,7 +134,7 @@ public class TouristRepository {
                 .collect(Collectors.joining(", "));
 
         String sqlAttachTags = "INSERT INTO attraction_tags (attraction_id, tag_id) " +
-                "SELECT (SELECT attraction_id FROM attractions WHERE attraction_name = ?), " +
+                "SELECT (SELECT attraction_id FROM attractions WHERE attraction_name = ? LIMIT 1), " +
                 "tag_id FROM tags WHERE tag_name IN (" + tagAmountString + ")";
 
         List<Object> params = new ArrayList<>();
