@@ -12,8 +12,6 @@ import java.util.*;
 
 public class AttractionExtractor implements ResultSetExtractor<List<TouristAttraction>> {
 
-    private final CityMapper cityMapper = new CityMapper();
-
     @Override
     public List<TouristAttraction> extractData(ResultSet rs) throws SQLException, DataAccessException {
 

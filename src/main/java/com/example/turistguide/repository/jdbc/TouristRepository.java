@@ -4,12 +4,8 @@ import com.example.turistguide.model.City;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.TouristTags;
 import com.example.turistguide.repository.mapper.AttractionExtractor;
-import com.example.turistguide.repository.mapper.CityMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.sql.Types;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,7 +15,6 @@ public class TouristRepository {
 
     private final JdbcTemplate jdbc;
     private final AttractionExtractor extractor = new AttractionExtractor();
-    private final CityMapper mapper = new CityMapper();
 
 
     public TouristRepository(JdbcTemplate jdbc) {
@@ -35,7 +30,7 @@ public class TouristRepository {
                 "ORDER BY a.attraction_name";
     }
 
-    public String sqlName() {
+    public String sqlGetAttractionsByName() {
         return "SELECT a.attraction_id, a.attraction_name, a.attraction_description, c.city_id, c.city_name AS cities, t.tag_name AS tags " +
                 "FROM attractions a " +
                 "JOIN cities c ON c.city_id = a.city_id " +
@@ -48,9 +43,9 @@ public class TouristRepository {
         return jdbc.query(sqlQuery(), extractor);
     }
 
-    public TouristAttraction getAttractionByName(String name) { // Hent attraction ud fra getAttractionsByName()
+    public TouristAttraction getAttractionByName(String name) {
 
-        String sql = sqlName();
+        String sql = sqlGetAttractionsByName();
 
         return jdbc.query(sql, new Object[]{name},
                 new int[]{Types.VARCHAR},
