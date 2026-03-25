@@ -25,10 +25,6 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        env:
-          PROD_DATABASE_URL: ${{secrets.PROD_DATABASE_URL}}
-          PROD_USERNAME: ${{secrets.PROD_USERNAME}}
-          PROD_PASSWORD: ${{secrets.PROD_PASSWORD}}
           
         run: mvn clean install
 
@@ -65,4 +61,9 @@ jobs:
           app-name: 'Touristguide-app'
           slot-name: 'Production'
           package: '*.jar'
+          
+          env:
+          PROD_DATABASE_URL: ${{secrets.PROD_DATABASE_URL}}
+          PROD_USERNAME: ${{secrets.PROD_USERNAME}}
+          PROD_PASSWORD: ${{secrets.PROD_PASSWORD}}
           
